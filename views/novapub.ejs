@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+        <title>O meu eu digital...</title>
+		
+    </head>
+    <body>
+		<div class='w3-card-4'/>
+		<header class='w3-container w3-green'>
+			<h1><b>omeueu</b></h1>
+			<h4>Nova Publicação</h4>
+		</header>
+		<% 
+					var d = new Date
+					var hora = d.toUTCString() %>
+		<form action='/pub' method='POST'>
+			<fieldset>
+				<legend>Info da publicação (preencha os campos que pretender):</legend>
+				<input type='text' placeholder='Titulo' name='titulo'/><br>
+				<input type='text' placeholder='Local' name='local'/><br>
+				<textarea rows='5' cols='80' name='desc' placeholder='Descrição'></textarea><br>
+				<input type='text' placeholder='Duração' name='duracao'/><br>
+				<input type='text' placeholder='Actividade' name='actividade'/><br>
+				<input type='text' placeholder='Creditacao' name='creditacao'/><br>
+				<input type='hidden' name='hora' value='<%= hora %>'/>
+			</fieldset>
+			<fieldset>
+				<legend>Tipo de publicação:</legend>
+				<label>Receita Culinária</label>
+				<input type='radio' name='tipo' value='Receita Culinária' /><br>
+				<label>Registo Desportivo</label>
+				<input type='radio' name='tipo' value='Registo Desportivo' /><br>
+				<label>Evento</label>
+				<input type='radio' name='tipo' value='Evento'/><br>
+				<label>Registo de Formação</label>
+				<input type='radio' name='tipo' value='Registo de Formação' /><br>
+				<label>Ideia</label>
+				<input type='radio' name='tipo' value='Ideia' /><br>
+				<label>Álbum Fotográfico</label>
+				<input type='radio' name='tipo' value='Registo de Formação' /><br>
+				<label>Participação em Evento Científico</label>
+				<input type='radio' name='tipo' value='Participação em Evento Científico' /><br>
+				<label>Outro</label>
+				<input type='radio' name='tipo' value='Outro' checked/>
+			</fieldset>
+			<div align='right'>
+			<a href='./..'><input type='button' value='Cancelar' class='w3-button w3-green' /></a> 
+			<input type='submit' value='Publicar' class='w3-button w3-green' />
+			</div>
+			
+		</form>
+	</body>
+</html>
