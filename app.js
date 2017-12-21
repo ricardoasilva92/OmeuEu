@@ -2,39 +2,41 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 
-
+var app = express();
+var index = require('./routes/index');
 //DATABASE
-var dbglobal
-var MongoClient = require('mongodb').MongoClient
-var dburl = 'mongodb://localhost:27017/omeueu'
-MongoClient.connect(dburl,(err,d)=>{ 
-  if(!err){
-    dbglobal = d
-  }
-  else{
-    console.log('Erro: '+err)
-  }
+var mongoose= require('mongoose')
+
+mongoose.connect('mongodb://localhost:27017/omeueu',{useMongoClient:true})
+mongoose.Promise=global.Promise
+
+
+
+//verificar conexao
+let db = mongoose.connection;
+db.once('open',function(){
+  console.log('Ligado ao mongoDb')
 })
 
-var app = express();
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-var index = require('./routes/index');
+
+
+
 
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//MIDDLEWARE P TORNAR A CONEXÃO À BD ACESSIVEL AO INDEX.JS
-app.use((req,res,next)=>{
-  req.db = dbglobal
-  next()
-})
 
 app.use('/', index);
+
+//MIDDLEWARE P TORNAR A CONEXÃO À BD ACESSIVEL AO INDEX.JS
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

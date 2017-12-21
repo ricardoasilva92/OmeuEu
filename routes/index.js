@@ -1,22 +1,26 @@
 var express = require('express');
 var router = express.Router();
-
+var PUB = require('../models/pubs')
 /* GET home page. */
-router.get('/',(req,res)=>{
-  var db = req.db
-  db.collection('publicacoes').find().toArray((err,publs)=>{
-      if(!err){
-          res.render('index.ejs',{pubs: publs})
-      }
-      else{
-          console.log('Erro: ' + err)
-          res.send('Erro: ' + err)
-      }
-  })
-})
 
-router.get('/receita',(req,res)=>{
-    res.render('receita.ejs')
+router.get('/',(req,res,next)=>{
+    PUB
+    .find()
+    .sort({data:-1})
+    .exec((err,doc)=>{
+      if(!err){
+        res.render('index.ejs',{pubs: doc})
+      }
+      else
+      console.log('Erro: ' + err)
+      res.send('Erro: ' + err)
+    })
+});
+
+
+router.get('/receita',(req,res,next)=>{
+    
+    res.render('receita.ejs',{})
 })
 
 router.get('/reg_desp',(req,res)=>{
@@ -24,6 +28,7 @@ router.get('/reg_desp',(req,res)=>{
 })
 
 router.get('/evento',(req,res)=>{
+    console.log('get de evento')
     res.render('evento.ejs')
 })
 
@@ -47,20 +52,23 @@ router.get('/outro',(req,res)=>{
     res.render('outro.ejs')
 })
 
-router.post('/pub',(req,res)=>{
-  var db = req.db
-  console.log(req.body)
-  db.collection('publicacoes').save(req.body,(err,resultado)=>{
-      if(!err){
-          console.log('Registo gravado: '+resultado)
-          res.redirect('/')
-      }
-      else{
-          console.log('Erro: '+err)
-          res.send('Erro ao gravar na BD :(')
-      }
-  })
-})
 
+
+router.post('/pub',(req,res)=>{
+    var nova = new PUB({
+        titulo: req.body.titulo,
+        local: req.body.local,
+        desc: req.body.desc,
+        hora: req.body.hora,
+        tipo: req.body.tipo
+    })
+    nova.save((err,resultado)=>{
+        if(!err){
+            console.log("Publicacao adicionada:"+req.body.titulo)
+          }
+          else{console.log("erro" + err)}
+    })
+    res.redirect('/')
+})
 
 module.exports = router;
