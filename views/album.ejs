@@ -40,7 +40,7 @@
 		<% 
 					var d = new Date
 					var hora = d.toUTCString() %>
-		<form action='/pub' method='POST'>
+		<form action='/pub' method='POST' enctype='multipart/form-data' >
 			<fieldset>
 				<legend>Info da publicação (preencha os campos que pretender):</legend>
 				<input type='text' placeholder='Titulo' name='titulo'/><br>

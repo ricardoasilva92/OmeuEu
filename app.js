@@ -1,7 +1,7 @@
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
-
+var fs = require('fs');
 var app = express();
 var index = require('./routes/index');
 //DATABASE
@@ -29,11 +29,10 @@ app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public')));
-
+//app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'))
 
 app.use('/', index);
-
 //MIDDLEWARE P TORNAR A CONEXÃO À BD ACESSIVEL AO INDEX.JS
 
 

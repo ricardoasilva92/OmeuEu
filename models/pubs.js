@@ -8,6 +8,7 @@ var PubSchema = new Schema(
         desc: {type:String,required:true},
         hora: {type:String,required:true},
         tipo: {type:String,required:false},
+        pic1: {id_img:String,nome_img:String,img_path:String}
 
     }
 )
