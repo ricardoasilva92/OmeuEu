@@ -122,12 +122,14 @@
 							<td><%= pubs[i].creditacao %></td> 
 						</tr>
 						<% } %>
-						<% if(pubs[i].pic1 != "" && pubs[i].pic1 != null){%>						
+						<% if(pubs[i].pic){
+						for(j = 0; j < pubs[i].pic.length; j++){ 
+						if(pubs[i].pic[j] != "" && pubs[i].pic[j] != null){%>						
 							<tr>
 								<th>Foto1: </th>
-								<td><a href='http://localhost:3000/images/<%=pubs[i].pic1.id_img%>'+ ><%= pubs[i].pic1.nome_img %></a></td> 
+								<td><a href='http://localhost:3000/images/<%=pubs[i].pic[j].id_img%>'+ ><%= pubs[i].pic[j].nome_img %></a></td> 
 							</tr>
-							<% } %>
+							<% }}} %>
 
 
 						

@@ -36,7 +36,7 @@ const storage = multer.diskStorage({
 router.get('/',(req,res,next)=>{
     PUB
     .find()
-    .sort({data:-1})
+    .sort({hora:-1})
     .exec((err,doc)=>{
       if(!err){
         res.render('index.ejs',{pubs: doc})
@@ -84,24 +84,41 @@ router.get('/outro',(req,res)=>{
 
 
 
-router.post('/pub',upload.single('pic1'),(req,res,next)=>{
-    console.log('FIELDNAME  ' + req.file.fieldname)
-    console.log('ORIGINAL NAME  ' + req.file.originalname)
-    console.log('path do ficheiro' + req.file.path)
+router.post('/pub',upload.any(),(req,res,next)=>{
+   // console.log(req.body)
+    //console.log(req.files)
+    //console.log(req.files.length)
+    
+
+    
+  
     var nova = new PUB({
         titulo: req.body.titulo,
         local: req.body.local,
         desc: req.body.desc,
         hora: req.body.hora,
         tipo: req.body.tipo,
-        pic1: {id_img:req.file.filename , nome_img:req.file.originalname, img_path:req.file.path}
+        pic: []
     })
+    if(req.files){
+    for(var i=0;i<req.files.length;i++){
+        var novo = {
+            id_img: req.files[i].filename,
+            nome_img: req.files[i].originalname,
+            img_path: req.files[i].path
+            
+        }   
+        nova.pic[i] = novo 
+    }}
+    console.log(nova)
+        
+    
     nova.save((err,resultado)=>{
         if(!err){
             console.log("Publicacao adicionada:"+req.body.titulo)
           }
           else{console.log("erro" + err)}
-    })
+    }) 
     res.redirect('/')
 })
 
