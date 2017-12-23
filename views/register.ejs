@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+        <title>omeueu - Registo</title>
+		
+    </head>
+    <body>
+		<div class='w3-card-4'></div>
+		<header class='w3-container w3-green'>
+			<h1><b>omeueu</b></h1>
+			<h4>Página de Registo</h4>
+		</header>
+		<%- messages('message.ejs', locals) %>
+		<form action='/users/register' method='POST'>
+			<fieldset>
+				<input type='text' placeholder='Nome' name='name'/><br>
+				<input type='text' placeholder='Email' name='email'/><br>
+				<input type='text' placeholder='Username' name='username'/><br>
+				<input type='password' placeholder='Password' name='password'/><br>
+				<input type='password' placeholder='Confirme Password' name='password2'/><br>
+			</fieldset>
+			<div align='right'>
+			<a href='./..'><input type='button' value='Cancelar' class='w3-button w3-green' /></a> 
+			<input type='submit' value='Registar' class='w3-button w3-green' />
+			</div>
+			
+		</form>
+	</body>
+</html>

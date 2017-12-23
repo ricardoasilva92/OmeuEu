@@ -48,40 +48,37 @@ router.get('/',(req,res,next)=>{
 
 
 
-router.get('/receita',(req,res,next)=>{
-    
+router.get('/receita', ensureAuthenticated, (req,res)=>{
     res.render('receita.ejs')
 })
 
-router.get('/reg_desp',(req,res)=>{
+router.get('/reg_desp', ensureAuthenticated, (req,res)=>{
     res.render('reg_desp.ejs')
 })
 
-router.get('/evento',(req,res)=>{
-    console.log('get de evento')
+router.get('/evento', ensureAuthenticated,(req,res)=>{
     res.render('evento.ejs')
 })
 
-router.get('/reg_form',(req,res)=>{
+router.get('/reg_form', ensureAuthenticated,(req,res)=>{
     res.render('reg_form.ejs')
 })
 
-router.get('/ideia',(req,res)=>{
+router.get('/ideia', ensureAuthenticated,(req,res)=>{
     res.render('ideia.ejs')
 })
 
-router.get('/album',(req,res)=>{
+router.get('/album', ensureAuthenticated,(req,res)=>{
     res.render('album.ejs')
 })
 
-router.get('/ev_cient',(req,res)=>{
+router.get('/ev_cient', ensureAuthenticated,(req,res)=>{
     res.render('ev_cient.ejs')
 })
 
-router.get('/outro',(req,res)=>{
+router.get('/outro', ensureAuthenticated,(req,res)=>{
     res.render('outro.ejs')
 })
-
 
 
 router.post('/pub',upload.any(),(req,res,next)=>{
@@ -98,6 +95,7 @@ router.post('/pub',upload.any(),(req,res,next)=>{
         desc: req.body.desc,
         hora: req.body.hora,
         tipo: req.body.tipo,
+        autor: req.body.name,
         pic: []
     })
     if(req.files){
@@ -121,5 +119,14 @@ router.post('/pub',upload.any(),(req,res,next)=>{
     }) 
     res.redirect('/')
 })
+
+function ensureAuthenticated(req,res,next){
+    if(req.isAuthenticated()){
+        return next();
+    } else {
+        req.flash('danger','Não está autenticado. Por favor, faça login')
+        res.redirect('/users/login')
+    }
+}
 
 module.exports = router;

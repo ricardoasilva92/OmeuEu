@@ -141,21 +141,29 @@
 			&nbsp;
 			<b> Sem publicações :( <br> &nbsp; Crie uma! </b><br>
 			<% } %>
-			<div align='right'>
-				<div class="dropdown">
-					<button class="novapub"> Nova Publicação
-					</button>
-					<div class="dropdown-content">
-							<a href="./evento">Evento</a>
-							<a href="./ideia">Ideia</a>
-							<a href="./reg_desp">Registo Desportivo</a>
-							<a href="./reg_form">Registo de formação</a>
-							<a href="./album">Album fotográfico</a>
-							<a href="./receita">Receita culinária</a>
-							<a href="./ev_cient">Evento Cientéfico</a>
-							<a href="./outro">Outro</a>
-						  </div>
-				</div>
+			<% if(user) {%>
+				<div align='right'>
+						<div class="dropdown">
+							<button class="novapub"> Nova Publicação
+							</button>
+							<div class="dropdown-content">
+									<a href="./evento">Evento</a>
+									<a href="./ideia">Ideia</a>
+									<a href="./reg_desp">Registo Desportivo</a>
+									<a href="./reg_form">Registo de formação</a>
+									<a href="./album">Album fotográfico</a>
+									<a href="./receita">Receita culinária</a>
+									<a href="./ev_cient">Evento Cientéfico</a>
+									<a href="./outro">Outro</a>
+								  </div>
+						</div>
+					</div>
+				<a href='./users/logout'><input type='button' value='Logout' class='w3-button w3-green' /></a>
+			<%} else {%>
+				<a href='./users/register'><input type='button' value='Registar' class='w3-button w3-green' /></a> 
+				<a href='./users/login'><input type='button' value='Login' class='w3-button w3-green' /></a> 
+			 
+			<%}%>
 			</div>
     </body>
 </html>

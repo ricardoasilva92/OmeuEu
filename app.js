@@ -4,10 +4,16 @@ var bodyParser = require('body-parser');
 var fs = require('fs');
 var app = express();
 var index = require('./routes/index');
+
+var users = require('./routes/users');
+
+var session = require('express-session');
+var passport = require('passport');  
+const config = require('./config/database')
 //DATABASE
 var mongoose= require('mongoose')
 
-mongoose.connect('mongodb://localhost:27017/omeueu',{useMongoClient:true})
+mongoose.connect(config.database,{useMongoClient:true})
 mongoose.Promise=global.Promise
 
 
@@ -18,11 +24,6 @@ db.once('open',function(){
   console.log('Ligado ao mongoDb')
 })
 
-
-
-
-
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -32,10 +33,35 @@ app.use(bodyParser.json());
 //app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static('public'))
 
+// validator (campos de registo)
+var expressValidator = require('express-validator');
+app.use(expressValidator())
+
+// messagens de alerta
+app.use(session({
+  secret: 'keyboard cat',
+  resave: true,
+  saveUninitialized: true
+}));
+app.use(require('connect-flash')());
+app.use(function (req, res, next) {
+  res.locals.messages = require('express-messages')(req, res);
+  next();
+});
+// Passport Config
+require('./config/passport')(passport);
+// Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('*',function(req,res,next){
+  res.locals.user = req.user || null;
+  next();
+})
+
 app.use('/', index);
+app.use('/users', users);
 //MIDDLEWARE P TORNAR A CONEXÃO À BD ACESSIVEL AO INDEX.JS
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
