@@ -17,8 +17,9 @@ var PubSchema = new Schema(
         desc: {type:String,required:true},
         hora: {type:String,required:true},
         tipo: {type:String,required:false},
+        autor:{type:String,required:false},
         pic: [PicSchema]
-
+        
     }
 )
 
