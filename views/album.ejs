@@ -1,41 +1,30 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8"/>
-		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
-        <title>O meu eu digital...</title>
-		
-	</head>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script>
-	  $(document).ready(function(){
-	  var counter =1;
-	  $("#adicionar").click(function(){
-	  if(counter<6)
-	  counter++;
-	  else{
-	  alert("Só 6 ficheiros permitidos");
-	  return false;
-	  }
-	  var novoFicheiro = $(document.createElement('div')).attr("id", 'pic' + counter);
-	  novoFicheiro.after().html('<label>Fotografia '+ counter + ' : </label>' + '<input type="file" name="pic' + counter + '" id="pic' + counter + '"class="w3-input w3-border"" >');
-	  novoFicheiro.appendTo("#fotos");
-	  });
-	  $("#remover").click(function(){
-	  if(counter==1){
-	  alert("Mínimo uma foto");
-	  return false;
-	  }
-	  $("#pic" + counter).remove();
-	  counter--;
-	  })
-	  })
-	</script>
-    <body>
-		<div class='w3-card-4'/>
-		<header class='w3-container w3-green'>
-			<h1><b>omeueu</b></h1>
-			<h4>Nova Publicação</h4>
+<%- include('header') -%>
+		<h4>Nova Publicação</h4>
+			<script>
+				$(document).ready(function(){
+				var counter =1;
+				$("#adicionar").click(function(){
+				if(counter<6)
+				counter++;
+				else{
+				alert("Só 6 ficheiros permitidos");
+				return false;
+				}
+				var novoFicheiro = $(document.createElement('div')).attr("id", 'pic' + counter);
+				novoFicheiro.after().html('<label>Fotografia '+ counter + ' : </label>' + '<input type="file" name="pic' + counter + '" id="pic' + counter + '"class="w3-input w3-border"" >');
+				novoFicheiro.appendTo("#fotos");
+				});
+				$("#remover").click(function(){
+				if(counter==1){
+				alert("Mínimo uma foto");
+				return false;
+				}
+				$("#pic" + counter).remove();
+				counter--;
+				})
+				})
+			  </script>
+			
 		</header>
 		<% 
 					var d = new Date

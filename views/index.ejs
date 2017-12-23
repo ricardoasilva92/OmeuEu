@@ -1,74 +1,4 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8"/>
-		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
-		<title>O meu eu digital...</title>	
-		<style>
-				.navbar {
-					overflow: hidden;
-					background-color: #333;
-					font-family: Arial;
-				}
-				
-				.navbar a {
-					float: left;
-					font-size: 16px;
-					color: white;
-					text-align: center;
-					padding: 14px 16px;
-					text-decoration: none;
-				}
-				
-				.dropdown {
-					float: left;
-					overflow: hidden;
-				}
-				
-				.dropdown .dropbtn {
-					font-size: 16px;    
-					border: none;
-					outline: none;
-					color: white;
-					padding: 14px 16px;
-					background-color: inherit;
-				}
-				
-				.navbar a:hover, .dropdown:hover .dropbtn {
-					background-color: rgb(255, 0, 0);
-				}
-				
-				.dropdown-content {
-					display: none;
-					position: absolute;
-					background-color: #f9f9f9;
-					min-width: 160px;
-					box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-					z-index: 1;
-				}
-				
-				.dropdown-content a {
-					float: none;
-					color: black;
-					padding: 12px 16px;
-					text-decoration: none;
-					display: block;
-					text-align: left;
-				}
-				
-				.dropdown-content a:hover {
-					background-color: #ddd;
-				}
-				
-				.dropdown:hover .dropdown-content {
-					display: block;
-				}
-				</style>
-    </head>
-    <body>
-		<div class='w3-card-4'/>
-		<header class='w3-container w3-green'>
-			<h1><b>omeueu</b></h1>
+<%- include('header') -%>
 			<h4>As Suas Publicações</h4>
 		</header>
 			<div class='w3-container'>	
@@ -146,9 +76,9 @@
 			<b> Sem publicações :( <br> &nbsp; Crie uma! </b><br>
 			<% } %>
 			<% if(user) {%>
-				<div align='right'>
+				<div align='right' >
 						<div class="dropdown">
-							<button class="novapub"> Nova Publicação
+							<button class="w3-button w3-green"> Nova Publicação
 							</button>
 							<div class="dropdown-content">
 									<a href="./evento">Evento</a>
