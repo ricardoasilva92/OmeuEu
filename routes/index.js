@@ -95,7 +95,7 @@ router.post('/pub',upload.any(),(req,res,next)=>{
         desc: req.body.desc,
         hora: req.body.hora,
         tipo: req.body.tipo,
-        autor: req.user.username,
+        autor: req.user.name,
         pic: []
     })
     if(req.files){

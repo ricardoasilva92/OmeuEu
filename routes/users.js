@@ -18,10 +18,13 @@ router.post('/register', function(req,res){
   const password = req.body.password;
   const password2 = req.body.password2;
 
+  const xname = User.findOne({"username":name})
+
   req.checkBody('name', 'Nome obrigatório').notEmpty();
   req.checkBody('email', 'Email obrigatório').notEmpty();
   req.checkBody('email', 'Email não válido').isEmail();
   req.checkBody('username', 'Username obrigatório').notEmpty();
+  req.checkBody('username', 'Username já existe').equals(xname);
   req.checkBody('password', 'Password obrigatória').notEmpty();
   req.checkBody('password2', 'Passwords não coincidem').equals(req.body.password);
 
