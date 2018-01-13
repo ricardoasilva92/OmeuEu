@@ -41,14 +41,19 @@
 				<input type='hidden' name='tipo' value='Álbum Fotográfico'/>
 			</fieldset>
 			<fieldset id="fotos">
-					<legend>Fotografias</legend>
-					<input id="adicionar" type="button" value="+1"/>
-					<input id="remover" type="button" value="-1"/>
-					<div id="pic1">
-					  <label>Fotografia 1:</label>
-					  <input type="file" name="pic1" class="w3-input w3-border"/>
-					</div>
-				  </fieldset>
+				<legend>Fotografias</legend>
+				<input id="adicionar" type="button" value="+1"/>
+				<input id="remover" type="button" value="-1"/>
+				<div id="pic1">
+					<label>Fotografia 1:</label>
+					<input type="file" name="pic1" class="w3-input w3-border"/>
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend>Privacidade</legend>
+				<input type="radio" name="priv" value="private" checked> Privado<br>
+				<input type="radio" name="priv" value="public"> Público<br>
+			</fieldset>
 			<div align='right'>
 			<a href='./..'><input type='button' value='Cancelar' class='w3-button w3-green' /></a> 
 			<input type='submit' value='Publicar' class='w3-button w3-green' />

@@ -26,11 +26,11 @@
 			
 		</header>
 			<div class='w3-container'>	
-
 					<% 
 					var d = new Date
 					var hora = d.toISOString()
 					for(var i=0; i<pubs.length; i++){%>
+					<% if(pubs[i].priv == 'public' || pubs[i].username == user.username){ %>
 					<fieldset>
 					<legend><b><%= pubs[i].tipo %></b></legend>
 					<table class='w3-table'>
@@ -149,8 +149,9 @@
 								}
 						</script>
 					</table>
+					<a href="/pub/edit/<%=pubs[i]._id%>" class="btn btn-default">Editar</a>
 					</fieldset>
-					<% } %>       	 
+					<% }} %>       	 
 			</div>
 			<% if(pubs.length==0) {%>
 			&nbsp;

@@ -17,8 +17,13 @@ var PubSchema = new Schema(
         desc: {type:String,required:true},
         hora: {type:String,required:true},
         tipo: {type:String,required:false},
+        username:{type:String,required:false},
         autor:{type:String,required:false},
-        pic: [PicSchema]
+        duracao:{type:String,required:false},
+        creditacao:{type:String,required:false},
+        actividade:{type:String,required:false},
+        pic: [PicSchema],
+        priv:{type:String,required:true}
         
     }
 )

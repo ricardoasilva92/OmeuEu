@@ -12,11 +12,15 @@
 				<textarea rows='5' cols='80' name='desc' placeholder='Descrição'></textarea><br>
 				<input type='hidden' name='hora' value='<%= hora %>'/>
 			</fieldset>
+			<fieldset>
+				<legend>Privacidade</legend>
+				<input type="radio" name="priv" value="private" checked> Privado<br>
+				<input type="radio" name="priv" value="public"> Público<br>
+			</fieldset>
 			<div align='right'>
 			<a href='./..'><input type='button' value='Cancelar' class='w3-button w3-green' /></a> 
 			<input type='submit' value='Publicar' class='w3-button w3-green' />
 			</div>
-			
 		</form>
 	</body>
 </html>

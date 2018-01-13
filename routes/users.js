@@ -17,24 +17,54 @@ router.post('/register', function(req,res){
   const username = req.body.username;
   const password = req.body.password;
   const password2 = req.body.password2;
+  /*var flag1 = false;
+  var flag2 = false;
 
-  const xname = User.findOne({"username":name})
+  User.find({"username":username}).exec((err,doc)=>{
+    if(!err){
+      if(doc.length!=0){
+        flag1 = true;
+        console.log('usernameflag: '+flag1)
+      }
+    }
+    else {
+      console.log('erro ao checkar username')
+    }
+  })
+
+  User.find({"email":email}).exec((err,doc)=>{
+    if(!err){
+      if(doc.length!=0){
+        var flag2 = true;
+        console.log('emailflag: '+flag2)
+      }
+    }
+    else {
+      console.log('erro ao checkar email')
+    }
+  })*/
 
   req.checkBody('name', 'Nome obrigatório').notEmpty();
   req.checkBody('email', 'Email obrigatório').notEmpty();
   req.checkBody('email', 'Email não válido').isEmail();
   req.checkBody('username', 'Username obrigatório').notEmpty();
-  req.checkBody('username', 'Username já existe').equals(xname);
   req.checkBody('password', 'Password obrigatória').notEmpty();
   req.checkBody('password2', 'Passwords não coincidem').equals(req.body.password);
 
   let errors = req.validationErrors();
 
-  if(errors){
+  //if(errors || flag1 || flag2){
+    if(errors){
     console.log('erro ao registar user')
     for (i = 0; i < errors.length; i++) {
       req.flash('error',errors[i].msg)
     } 
+    /*if(flag1){
+      req.flash('error','Username já existente')
+    }
+    if(flag2){
+      req.flash('error','Email já existente')
+    }*/
     res.render('register.ejs')
   } else {
     let newUser = new User({
@@ -55,11 +85,12 @@ router.post('/register', function(req,res){
           console.log(err);
           return;
         } else {
+          //console.log('user registado, uflag: '+flag1+' eflag: '+flag2)
           req.flash('success_msg','Está agora registado!')
           res.redirect('/users/login')
         }
       })
-    }); 
+    }) 
   })
 }
 })

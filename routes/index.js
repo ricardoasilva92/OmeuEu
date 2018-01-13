@@ -80,23 +80,68 @@ router.get('/outro', ensureAuthenticated,(req,res)=>{
     res.render('outro.ejs')
 })
 
+//editar publicacao
+router.get('/pub/edit/:id',function(req,res){
+    PUB
+    .findOne({_id:req.params.id})
+    .exec((err,pub)=>{
+        if(!err){
+        res.render('edit_event',{pub:pub})
+        }
+        else{
+        res.render('error',{error:err})
+        }
+    })
+    })
+
+
+//fazer UPDATE de publicacao
+router.post('/pub/edit/:id', function(req,res){
+    let pub={}
+    if(req.body.titulo)
+        pub.titulo=req.body.titulo
+    if(req.body.local)
+        pub.local=req.body.local
+    if(req.body.desc)
+        pub.desc=req.body.desc
+    if(req.body.duracao)
+        pub.duracao=req.body.duracao
+    if(req.body.actividade)
+        pub.actividade=req.body.actividade
+    if(req.body.creditacao)
+        pub.creditacao=req.body.creditacao
+
+    let query = {_id:req.params.id}
+
+    PUB.update(query,pub,function(err){
+        if(err){
+            console.log(err)
+            return
+        }
+        else {
+            res.redirect('/')
+        }
+    })
+})
 
 router.post('/pub',upload.any(),(req,res,next)=>{
    // console.log(req.body)
     //console.log(req.files)
     //console.log(req.files.length)
-    
 
-    
-  
     var nova = new PUB({
         titulo: req.body.titulo,
         local: req.body.local,
         desc: req.body.desc,
         hora: req.body.hora,
         tipo: req.body.tipo,
+        username: req.user.username,
         autor: req.user.name,
-        pic: []
+        duracao: req.body.duracao,
+        creditacao: req.body.creditacao,
+        actividade: req.body.actividade,
+        pic: [],
+        priv: req.body.priv
     })
     if(req.files){
     for(var i=0;i<req.files.length;i++){
@@ -104,7 +149,6 @@ router.post('/pub',upload.any(),(req,res,next)=>{
             id_img: req.files[i].filename,
             nome_img: req.files[i].originalname,
             img_path: req.files[i].path
-            
         }   
         nova.pic[i] = novo 
     }}

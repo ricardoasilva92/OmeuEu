@@ -1,0 +1,41 @@
+<%- include('header') -%>
+<h3>Edição de Publicação</h3>
+</header>
+<% 
+        var d = new Date
+        var hora = d.toUTCString() %>
+<form action='/pub/edit/<%=pub._id%>' method='POST' >
+<fieldset>
+    <legend>Info da publicação (preencha os campos que pretender):</legend>
+    <input type='text' placeholder='Titulo' name='titulo' value='<%=pub.titulo %>' /><br>
+    
+    <% if(pub.local != "" && pub.local != null){%>
+        <input type='text' placeholder='Local' name='local' value='<%=pub.local %>' /><br>
+        <% } %>
+    
+    <textarea rows='5' cols='80' name='desc' placeholder='Descrição'><%=pub.desc %></textarea><br>
+    
+    <% if(pub.duracao != "" && pub.duracao != null){%>
+        <input type='text' placeholder='Duração' name='duracao' value='<%=pub.duracao%>' /><br>
+        <% } %>
+        
+    <% if(pub.actividade != "" && pub.actividade != null){%>
+        <input type='text' placeholder='Actividade' name='actividade' value='<%=pub.actividade%>' /><br>
+    <% } %>
+    
+    <% if(pub.creditacao != "" && pub.creditacao != null){%>
+        <input type='text' placeholder='Creditacao' name='creditacao' value='<%=pub.creditacao%>' /><br>
+    <% } %>  
+
+
+    <input type='hidden' name='hora' value='<%= hora %>'/>
+    
+</fieldset>
+<div align='right'>
+<a href='./../..'><input type='button' value='Cancelar' class='w3-button w3-green' /></a> 
+<input type='submit' value='Publicar' class='w3-button w3-green' />
+</div>
+
+</form>
+</body>
+</html>
