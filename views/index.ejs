@@ -29,12 +29,13 @@
 					<% 
 					var d = new Date
 					var hora = d.toISOString()
+					var p = 0;
 					for(var i=0; i<pubs.length; i++){%>
-					<% if(pubs[i].priv == 'public' || pubs[i].username == user.username){ %>
+					<% if(pubs[i].priv == 'public' || (user && pubs[i].username == user.username)){ %>
 					<fieldset>
 					<legend><b><%= pubs[i].tipo %></b></legend>
 					<table class='w3-table'>
-						<% if(pubs[i].hora != "" && pubs[i].hora != null){%>						
+						<% if(pubs[i].hora != "" && pubs[i].hora != null){ p++%>
 						<tr>
 							<th>Publicação de </th>
 							<td><%= pubs[i].hora %></td> 
@@ -153,7 +154,7 @@
 					</fieldset>
 					<% }} %>       	 
 			</div>
-			<% if(pubs.length==0) {%>
+			<% if(p==0) {%>
 			&nbsp;
 			<b> Sem publicações :( <br> &nbsp; Crie uma! </b><br>
 			<% } %>
