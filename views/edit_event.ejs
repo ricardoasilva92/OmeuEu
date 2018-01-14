@@ -6,7 +6,7 @@
         var hora = d.toUTCString() %>
 <form action='/pub/edit/<%=pub._id%>' method='POST' >
 <fieldset>
-    <legend>Info da publicação (preencha os campos que pretender):</legend>
+    <legend>Info da publicação:</legend>
     <input type='text' placeholder='Titulo' name='titulo' value='<%=pub.titulo %>' /><br>
     
     <% if(pub.local != "" && pub.local != null){%>
