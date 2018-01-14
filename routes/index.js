@@ -124,6 +124,21 @@ router.post('/pub/edit/:id', function(req,res){
     })
 })
 
+//apagar publicacoes
+router.delete('/pub/:id', function(req,res){
+    let query = {_id:req.params.id}
+
+    PUB.remove(query,function(err){
+        if(err){
+            console.log(err)
+        }
+        //responder ao request feito no main.js
+        res.send('Success')
+    })
+})
+
+
+
 router.post('/pub',upload.any(),(req,res,next)=>{
    // console.log(req.body)
     //console.log(req.files)
