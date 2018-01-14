@@ -7,6 +7,7 @@ var multer  = require('multer')
 
 
 
+
 //filtro das imagens upload
 const imageFilter = function (req, file, cb) {
     // accept image only
@@ -34,16 +35,37 @@ const storage = multer.diskStorage({
 /* GET home page. */
 
 router.get('/',(req,res,next)=>{
-    PUB
-    .find()
-    .sort({hora:-1})
-    .exec((err,doc)=>{
-      if(!err){
-        res.render('index.ejs',{pubs: doc})
-      }
-      else
-      console.log('Erro: ' + err)
-    })
+    var noMatch
+    if(req.query.search){ 
+        const regex = new RegExp(escapeRegex(req.query.search))
+        
+        PUB
+        .find({desc: regex})
+        .exec((err,doc)=>{
+            console.log(regex)
+            if(!err){
+                
+                if(doc.length==0){ // nao encontrou resultados
+                    noMatch = "Não foram encontrados resultados. Por favor tente outra vez."
+                }
+            res.render('index.ejs',{pubs: doc,noMatch : noMatch}) //noMatch como flag
+        }
+        else
+        console.log('Erro: ' + err)
+        })
+    }
+    else{ 
+        PUB
+        .find()
+        .sort({hora:-1})
+        .exec((err,doc)=>{
+        if(!err){
+            res.render('index.ejs',{pubs: doc,noMatch : noMatch})
+        }
+        else
+        console.log('Erro: ' + err)
+        })
+    }   
 });
 
 
@@ -186,6 +208,11 @@ function ensureAuthenticated(req,res,next){
         req.flash('danger','Não está autenticado. Por favor, faça login')
         res.redirect('/users/login')
     }
+}
+
+//função que vai receber a query
+function escapeRegex(text){
+    return text.replace(/[-\]{}()*+?.,\\^$|#\s]/g,"\\$&")
 }
 
 module.exports = router;

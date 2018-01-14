@@ -1,31 +1,49 @@
 <%- include('header') -%>
+		
 		<% if(user) {%>
-			<div align='right' >
-					<div class="dropdown">
-						<button class="w3-button w3-green"> Nova Publicação
-						</button>
-						<div class="dropdown-content">
-								<a href="./evento">Evento</a>
-								<a href="./ideia">Ideia</a>
-								<a href="./reg_desp">Registo Desportivo</a>
-								<a href="./reg_form">Registo de formação</a>
-								<a href="./album">Album fotográfico</a>
-								<a href="./receita">Receita culinária</a>
-								<a href="./ev_cient">Evento Cientéfico</a>
-								<a href="./outro">Outro</a>
-							</div>
+			
+			<div class="dropdown">
+				<button class="w3-button w3-green"> Nova Publicação
+				</button>
+				<div class="dropdown-content">
+						<a href="./evento">Evento</a>
+						<a href="./ideia">Ideia</a>
+						<a href="./reg_desp">Registo Desportivo</a>
+						<a href="./reg_form">Registo de formação</a>
+						<a href="./album">Album fotográfico</a>
+						<a href="./receita">Receita culinária</a>
+						<a href="./ev_cient">Evento Cientéfico</a>
+						<a href="./outro">Outro</a>
 					</div>
-				</div>
+			</div>
+				
 			<a href='./users/logout'><input type='button' value='Logout' class='w3-button w3-green' /></a>
 		<%} else {%>
 			<a href='./users/register'><input type='button' value='Registar' class='w3-button w3-green' /></a> 
-			<a href='./users/login'><input type='button' value='Login' class='w3-button w3-green' /></a> 
-		
-		<%}%>
-		</div>
+			<a href='./users/login'><input type='button' value='Login' class='w3-button w3-green' /></a>
+			<%}%>
 			
+		<form  align='right' action="/" method="GET" class="form-inline">
+					<div class="form-group">
+						<input type="text" name="search" placeholder="procura publicações..." class="form-control">
+						<input type="submit" value="Search" class="w3-button w3-blue">
+					</div>
+				</form>	
+		</div>
+		
 		</header>
+		
+
+			
 			<div class='w3-container'>	
+				<div class="col-md-6">
+					<% if(noMatch !== undefined) { %>
+						<h3><%=noMatch %></h3>
+					<% } %> 
+				</div>
+
+
+
 					<% 
 					var d = new Date
 					var hora = d.toISOString()
@@ -158,7 +176,7 @@
 					<% }} %> 
 					      	 
 			</div>
-			<% if(p==0) {%>
+			<% if(p==0 &&  noMatch==undefined) {%>
 			&nbsp;
 			<b> Sem publicações :( <br> &nbsp; Crie uma! </b><br>
 			<% } %>
