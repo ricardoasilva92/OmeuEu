@@ -116,6 +116,54 @@ router.get('/pub/edit/:id',function(req,res){
     })
     })
 
+router.get('/pub/t/:tipo',function(req,res){
+    var noMatch
+    var xtipo
+
+    if(req.params.tipo==='eventos')
+        xtipo = 'Evento'
+    if(req.params.tipo==='ideias')
+        xtipo = 'Ideia'
+    if(req.params.tipo==='regs_desp')
+        xtipo = 'Registo Desportivo'
+    if(req.params.tipo==='regs_form')
+        xtipo = 'Registo de Formação'
+    if(req.params.tipo==='albuns')
+        xtipo = 'Álbum Fotográfico'
+    if(req.params.tipo==='receitas')
+        xtipo = 'Receita Culinária'
+    if(req.params.tipo==='evts_cient')
+        xtipo = 'Participação em Evento Científico'
+    if(req.params.tipo==='outro')
+        xtipo = 'Outro'
+
+
+    PUB
+    .find({tipo:xtipo})
+    .exec((err,pub)=>{
+        if(!err){
+        res.render('index',{pubs:pub, noMatch : noMatch})
+        }
+        else{
+        res.render('error',{error:err})
+        }
+    })
+})
+
+router.get('/pub/show/:id',function(req,res){
+var noMatch
+    PUB
+    .find({_id:req.params.id})
+    .exec((err,pub)=>{
+        if(!err){
+        res.render('index',{pubs:pub, noMatch : noMatch})
+        }
+        else{
+        res.render('error',{error:err})
+        }
+    })
+    })
+
 
 //fazer UPDATE de publicacao
 router.post('/pub/edit/:id', function(req,res){

@@ -6,21 +6,21 @@
 				<button class="w3-button w3-green"> Nova Publicação
 				</button>
 				<div class="dropdown-content">
-						<a href="./evento">Evento</a>
-						<a href="./ideia">Ideia</a>
-						<a href="./reg_desp">Registo Desportivo</a>
-						<a href="./reg_form">Registo de formação</a>
-						<a href="./album">Album fotográfico</a>
-						<a href="./receita">Receita culinária</a>
-						<a href="./ev_cient">Evento Cientéfico</a>
-						<a href="./outro">Outro</a>
+						<a href="/evento">Evento</a>
+						<a href="/ideia">Ideia</a>
+						<a href="/reg_desp">Registo Desportivo</a>
+						<a href="/reg_form">Registo de formação</a>
+						<a href="/album">Album fotográfico</a>
+						<a href="/receita">Receita culinária</a>
+						<a href="/ev_cient">Evento Cientéfico</a>
+						<a href="/outro">Outro</a>
 					</div>
 			</div>
 				
-			<a href='./users/logout'><input type='button' value='Logout' class='w3-button w3-green' /></a>
+			<a href='/users/logout'><input type='button' value='Logout' class='w3-button w3-green' /></a>
 		<%} else {%>
-			<a href='./users/register'><input type='button' value='Registar' class='w3-button w3-green' /></a> 
-			<a href='./users/login'><input type='button' value='Login' class='w3-button w3-green' /></a>
+			<a href='/users/register'><input type='button' value='Registar' class='w3-button w3-green' /></a> 
+			<a href='/users/login'><input type='button' value='Login' class='w3-button w3-green' /></a>
 			<%}%>
 			
 		<form  align='right' action="/" method="GET" class="form-inline">
@@ -34,16 +34,122 @@
 		</header>
 		
 
-			
+		<table width="100%" class="w3-table">
+			<td width="20%" valign="top">
+				<h3>Índice por Tipo</h3>
+				<ul>
+						<% 
+						var eventos = []
+						var ideias = []
+						var regs_desp = []
+						var regs_form = []
+						var albuns = []
+						var receitas = []
+						var evts_cient = []
+						var outros = []
+						
+						for(var i=0; i<pubs.length; i++){%>
+							<% if(pubs[i].priv === 'public' || (user && pubs[i].username == user.username)){ 
+								if(pubs[i].tipo === 'Evento'){
+									eventos[eventos.length] = { id:pubs[i]._id, titulo:pubs[i].titulo }
+								}
+								if(pubs[i].tipo === 'Ideia'){
+									ideias[ideias.length] = { id:pubs[i]._id, titulo:pubs[i].titulo }
+								}
+								if(pubs[i].tipo === 'Registo Desportivo'){
+									regs_desp[regs_desp.length] = { id:pubs[i]._id, titulo:pubs[i].titulo }
+								}
+								if(pubs[i].tipo === 'Registo de Formação'){
+									regs_form[rf] = { id:pubs[i]._id, titulo:pubs[i].titulo }
+								}
+								if(pubs[i].tipo === 'Álbum Fotográfico'){
+									albuns[albuns.length] = { id:pubs[i]._id, titulo:pubs[i].titulo }
+								}
+								if(pubs[i].tipo === 'Receita Culinária'){
+									receitas[receitas.length] = { id:pubs[i]._id, titulo:pubs[i].titulo }
+								}
+								if(pubs[i].tipo === 'Participação em Evento Científico'){
+									evts_cient[evts_cient.length] = { id:pubs[i]._id, titulo:pubs[i].titulo }
+								}
+								if(pubs[i].tipo === 'Outro'){
+									outros[outros.length] = { id:pubs[i]._id, titulo:pubs[i].titulo }
+								}
+							}
+						}	%>
+
+							<% if(eventos.length!=0){ %>
+							<li><a href="/pub/t/eventos">Eventos</a></li>
+								<ul>
+									<% for(var i=0; i<eventos.length; i++){ %>
+										<li><a href="/pub/show/<%=eventos[i].id%>"><%= eventos[i].titulo %></a></li>
+									<% } %>
+								</ul>
+							<% } %>
+							<% if(ideias.length!=0){ %>
+							<li><a href="/pub/t/ideias">Ideias</a></li>
+								<ul>
+									<% for(var i=0; i<ideias.length; i++){ %>
+										<li><a href="/pub/show/<%=ideias[i].id%>"><%= ideias[i].titulo %></a></li>
+									<% } %>
+								</ul>
+							<% } %>
+							<% if(regs_desp.length!=0){ %>
+							<li><a href="/pub/t/regs_desp">Registos Desportivos</a></li>
+								<ul>
+									<% for(var i=0; i<regs_desp.length; i++){ %>
+										<li><a href="/pub/show/<%=regs_desp[i].id%>"><%= regs_desp[i].titulo %></a></li>
+									<% } %>
+								</ul>
+							<% } %>
+							<% if(regs_form.length!=0){ %>
+							<li><a href="/pub/t/regs_form">Registos de Formação</a></li>
+								<ul>
+									<% for(var i=0; i<regs_desp.length; i++){ %>
+										<li><a href="/pub/show/<%=regs_form[i].id%>"><%= regs_form[i].titulo %></a></li>
+									<% } %>
+								</ul>
+							<% } %>
+							<% if(albuns.length!=0){ %>
+							<li><a href="/pub/t/albuns">Álbuns Fotográficos</a></li>
+								<ul>
+									<% for(var i=0; i<albuns.length; i++){ %>
+										<li><a href="/pub/show/<%=albuns[i].id%>"><%= albuns[i].titulo %></a></li>
+									<% } %>
+								</ul>
+							<% } %>
+							<% if(receitas.length!=0){ %>
+							<li><a href="/pub/t/receitas">Receitas Culinárias</a></li>
+								<ul>
+									<% for(var i=0; i<receitas.length; i++){ %>
+										<li><a href="/pub/show/<%=receitas[i].id%>"><%= receitas[i].titulo %></a></li>
+									<% } %>
+								</ul>
+							<% } %>
+							<% if(evts_cient.length!=0){ %>
+							<li><a href="/pub/t/evts_cient">Eventos Científicos</a></li>
+								<ul>
+									<% for(var i=0; i<evts_cient.length; i++){ %>
+										<li><a href="/pub/show/<%=evts_cient[i].id%>"><%= evts_cient[i].titulo %></a></li>
+									<% } %>
+								</ul>
+							<% } %>
+							<% if(outros.length!=0){ %>
+							<li><a href="/pub/t/outros">Outros</a></li>
+								<ul>
+									<% for(var i=0; i<outros.length; i++){ %>
+										<li><a href="/pub/show/<%=outros[i].id%>"><%= outros[i].titulo %></a></li>
+									<% } %>
+								</ul>
+							<% } %>
+						</ul>
+			</td>
+			<td width="80%" valign="top">
 			<div class='w3-container'>	
 				<div class="col-md-6">
 					<% if(noMatch !== undefined) { %>
 						<h3><%=noMatch %></h3>
 					<% } %> 
 				</div>
-
-
-
 					<% 
 					var d = new Date
 					var hora = d.toISOString()
@@ -180,6 +286,7 @@
 			&nbsp;
 			<b> Sem publicações :( <br> &nbsp; Crie uma! </b><br>
 			<% } %>
-			
+			</td>
+		</table>		
     </body>
 </html>
