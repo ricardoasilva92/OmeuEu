@@ -1,0 +1,82 @@
+<%- include('header') -%>
+<h4>Nova Publicação</h4>
+	<% if(tipo==='Álbum Fotográfico'){ %>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+			<script>
+				$(document).ready(function(){
+				var counter =1;
+				$("#adicionar").click(function(){
+				if(counter<6)
+				counter++;
+				else{
+				alert("Só 6 ficheiros permitidos");
+				return false;
+				}
+				var novoFicheiro = $(document.createElement('div')).attr("id", 'pic' + counter);
+				novoFicheiro.after().html('<label>Fotografia '+ counter + ' : </label>' + '<input type="file" name="pic' + counter + '" id="pic' + counter + '"class="w3-input w3-border"" >');
+				novoFicheiro.appendTo("#fotos");
+				});
+				$("#remover").click(function(){
+				if(counter==1){
+				alert("Mínimo uma foto");
+				return false;
+				}
+				$("#pic" + counter).remove();
+				counter--;
+				})
+				})
+			</script>
+	<% } %>
+</header>
+<% 
+		var d = new Date
+		var hora = d.toUTCString() %>
+<% if(tipo==='Álbum Fotográfico'){ %>
+	<form action='/pub' method='POST' enctype='multipart/form-data' >
+<% } %>
+<% if(tipo!=='Álbum Fotográfico'){ %>
+	<form action='/pub' method='POST'>
+<% } %>
+<fieldset>
+	<legend>Info da publicação (preencha os campos que pretender):</legend>
+	<input type='text' placeholder='Titulo' name='titulo'/><br>
+	<% if(tipo!=='Ideia' && tipo!=='Receita Culinária'){ %>
+	<input type='text' placeholder='Local' name='local'/><br>
+	<% } %>
+	<textarea rows='5' cols='80' name='desc' placeholder='Descrição'></textarea><br>
+	<% if(tipo==='Registo Desportivo' || tipo==='Outro' ) { %>
+	<input type='text' placeholder='Duração' name='duracao'/><br>
+	<% } %>
+	<% if(tipo==='Registo Desportivo' || tipo==='Outro' ) { %>
+	<input type='text' placeholder='Actividade' name='actividade'/><br>
+	<% } %>
+	<% if(tipo==='Registo de Formação' || tipo==='Outro' ) { %>
+	<input type='text' placeholder='Creditacao' name='creditacao'/><br>
+	<% } %>
+	<input type='hidden' name='hora' value='<%= hora %>'/>
+	<input type='hidden' name='tipo' value='<%= tipo %>'/>
+</fieldset>
+<% if(tipo==='Álbum Fotográfico'){ %>
+	<fieldset id="fotos">
+		<legend>Fotografias</legend>
+		<input id="adicionar" type="button" value="+1"/>
+		<input id="remover" type="button" value="-1"/>
+		<div id="pic1">
+			<label>Fotografia 1:</label>
+			<input type="file" name="pic1" class="w3-input w3-border"/>
+		</div>
+	</fieldset>
+<% } %>
+<fieldset>
+	<legend>Privacidade</legend>
+	<input type="radio" name="priv" value="private" checked> Privado<br>
+	<input type="radio" name="priv" value="public"> Público<br>
+</fieldset>
+<div align='right'>
+<a href='./..'><input type='button' value='Cancelar' class='w3-button w3-green' /></a> 
+<input type='submit' value='Publicar' class='w3-button w3-green' />
+</div>
+
+</form>
+</body>
+</html>

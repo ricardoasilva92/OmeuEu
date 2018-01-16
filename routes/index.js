@@ -44,11 +44,21 @@ router.get('/',(req,res,next)=>{
         .exec((err,doc)=>{
             console.log(regex)
             if(!err){
+                PUB
+                .find()
+                .sort({hora:-1})
+                .exec((err,totaldoc)=>{
+                if(!err){
+                    res.render('index.ejs',{pubs: doc,noMatch : noMatch, ind: totaldoc})
+                }
+                else
+                console.log('Erro: ' + err)
+                })
                 
                 if(doc.length==0){ // nao encontrou resultados
                     noMatch = "Não foram encontrados resultados. Por favor tente outra vez."
                 }
-            res.render('index.ejs',{pubs: doc,noMatch : noMatch}) //noMatch como flag
+            res.render('index.ejs',{pubs: doc,noMatch : noMatch, ind: doc}) //noMatch como flag
         }
         else
         console.log('Erro: ' + err)
@@ -60,7 +70,7 @@ router.get('/',(req,res,next)=>{
         .sort({hora:-1})
         .exec((err,doc)=>{
         if(!err){
-            res.render('index.ejs',{pubs: doc,noMatch : noMatch})
+            res.render('index.ejs',{pubs: doc,noMatch : noMatch, ind: doc})
         }
         else
         console.log('Erro: ' + err)
@@ -68,8 +78,28 @@ router.get('/',(req,res,next)=>{
     }   
 });
 
+router.get('/newpub/:tipo', ensureAuthenticated, (req,res)=>{    
+    var xtipo
+    if(req.params.tipo==='evento')
+        xtipo = 'Evento'
+    if(req.params.tipo==='ideia')
+        xtipo = 'Ideia'
+    if(req.params.tipo==='reg_desp')
+        xtipo = 'Registo Desportivo'
+    if(req.params.tipo==='reg_form')
+        xtipo = 'Registo de Formação'
+    if(req.params.tipo==='album')
+        xtipo = 'Álbum Fotográfico'
+    if(req.params.tipo==='receita')
+        xtipo = 'Receita Culinária'
+    if(req.params.tipo==='ev_cient')
+        xtipo = 'Participação em Evento Científico'
+    if(req.params.tipo==='outro')
+        xtipo = 'Outro'
 
-
+    res.render('newpub.ejs',{tipo:xtipo})
+})
+/*
 router.get('/receita', ensureAuthenticated, (req,res)=>{
     res.render('receita.ejs')
 })
@@ -100,7 +130,7 @@ router.get('/ev_cient', ensureAuthenticated,(req,res)=>{
 
 router.get('/outro', ensureAuthenticated,(req,res)=>{
     res.render('outro.ejs')
-})
+})*/
 
 //editar publicacao
 router.get('/pub/edit/:id',function(req,res){
@@ -142,7 +172,16 @@ router.get('/pub/t/:tipo',function(req,res){
     .find({tipo:xtipo})
     .exec((err,pub)=>{
         if(!err){
-        res.render('index',{pubs:pub, noMatch : noMatch})
+            PUB
+            .find()
+            .sort({hora:-1})
+            .exec((err,tdoc)=>{
+            if(!err){
+                res.render('index.ejs',{pubs: pub,noMatch : noMatch, ind: tdoc})
+            }
+            else
+            console.log('Erro: ' + err)
+            })
         }
         else{
         res.render('error',{error:err})
@@ -155,8 +194,18 @@ var noMatch
     PUB
     .find({_id:req.params.id})
     .exec((err,pub)=>{
+        
         if(!err){
-        res.render('index',{pubs:pub, noMatch : noMatch})
+            PUB
+            .find()
+            .sort({hora:-1})
+            .exec((err,tdoc)=>{
+            if(!err){
+                res.render('index.ejs',{pubs: pub,noMatch : noMatch, ind:tdoc})
+            }
+            else
+            console.log('Erro: ' + err)
+            })
         }
         else{
         res.render('error',{error:err})

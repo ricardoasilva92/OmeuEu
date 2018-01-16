@@ -6,14 +6,14 @@
 				<button class="w3-button w3-green"> Nova Publicação
 				</button>
 				<div class="dropdown-content">
-						<a href="/evento">Evento</a>
-						<a href="/ideia">Ideia</a>
-						<a href="/reg_desp">Registo Desportivo</a>
-						<a href="/reg_form">Registo de formação</a>
-						<a href="/album">Album fotográfico</a>
-						<a href="/receita">Receita culinária</a>
-						<a href="/ev_cient">Evento Cientéfico</a>
-						<a href="/outro">Outro</a>
+						<a href="/newpub/evento">Evento</a>
+						<a href="/newpub/ideia">Ideia</a>
+						<a href="/newpub/reg_desp">Registo Desportivo</a>
+						<a href="/newpub/reg_form">Registo de formação</a>
+						<a href="/newpub/album">Álbum fotográfico</a>
+						<a href="/newpub/receita">Receita culinária</a>
+						<a href="/newpub/ev_cient">Evento Cientéfico</a>
+						<a href="/newpub/outro">Outro</a>
 					</div>
 			</div>
 				
@@ -48,31 +48,31 @@
 						var evts_cient = []
 						var outros = []
 						
-						for(var i=0; i<pubs.length; i++){%>
-							<% if(pubs[i].priv === 'public' || (user && pubs[i].username == user.username)){ 
-								if(pubs[i].tipo === 'Evento'){
-									eventos[eventos.length] = { id:pubs[i]._id, titulo:pubs[i].titulo }
+						for(var i=0; i<ind.length; i++){%>
+							<% if(ind[i].priv === 'public' || (user && ind[i].username == user.username)){ 
+								if(ind[i].tipo === 'Evento'){
+									eventos[eventos.length] = { id:ind[i]._id, titulo:ind[i].titulo }
 								}
-								if(pubs[i].tipo === 'Ideia'){
-									ideias[ideias.length] = { id:pubs[i]._id, titulo:pubs[i].titulo }
+								if(ind[i].tipo === 'Ideia'){
+									ideias[ideias.length] = { id:ind[i]._id, titulo:ind[i].titulo }
 								}
-								if(pubs[i].tipo === 'Registo Desportivo'){
-									regs_desp[regs_desp.length] = { id:pubs[i]._id, titulo:pubs[i].titulo }
+								if(ind[i].tipo === 'Registo Desportivo'){
+									regs_desp[regs_desp.length] = { id:ind[i]._id, titulo:ind[i].titulo }
 								}
-								if(pubs[i].tipo === 'Registo de Formação'){
-									regs_form[rf] = { id:pubs[i]._id, titulo:pubs[i].titulo }
+								if(ind[i].tipo === 'Registo de Formação'){
+									regs_form[rf] = { id:ind[i]._id, titulo:ind[i].titulo }
 								}
-								if(pubs[i].tipo === 'Álbum Fotográfico'){
-									albuns[albuns.length] = { id:pubs[i]._id, titulo:pubs[i].titulo }
+								if(ind[i].tipo === 'Álbum Fotográfico'){
+									albuns[albuns.length] = { id:ind[i]._id, titulo:ind[i].titulo }
 								}
-								if(pubs[i].tipo === 'Receita Culinária'){
-									receitas[receitas.length] = { id:pubs[i]._id, titulo:pubs[i].titulo }
+								if(ind[i].tipo === 'Receita Culinária'){
+									receitas[receitas.length] = { id:ind[i]._id, titulo:ind[i].titulo }
 								}
-								if(pubs[i].tipo === 'Participação em Evento Científico'){
-									evts_cient[evts_cient.length] = { id:pubs[i]._id, titulo:pubs[i].titulo }
+								if(ind[i].tipo === 'Participação em Evento Científico'){
+									evts_cient[evts_cient.length] = { id:ind[i]._id, titulo:ind[i].titulo }
 								}
-								if(pubs[i].tipo === 'Outro'){
-									outros[outros.length] = { id:pubs[i]._id, titulo:pubs[i].titulo }
+								if(ind[i].tipo === 'Outro'){
+									outros[outros.length] = { id:ind[i]._id, titulo:ind[i].titulo }
 								}
 							}
 						}	%>
@@ -273,7 +273,7 @@
 							captionText.innerHTML = dots[slideIndex-1].alt;
 							}
 					</script>
-					<% if(user) {%>
+					<% if(user && pubs[i].username == user.username) {%>
 					<a href="/pub/edit/<%=pubs[i]._id%>" class="btn btn-default">Editar</a>
 					<a href="#" class="btn btn-danger delete-pub" data-id='<%=pubs[i]._id%>' >Remover</a>
 					<%} %> 
