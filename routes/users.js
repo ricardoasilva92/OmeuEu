@@ -3,6 +3,7 @@ var router = express.Router();
 const bcrypt = require('bcryptjs')
 var passport = require('passport');  
 
+var PUB = require('../models/pubs')
 let User = require('../models/users');
 
 //register form
@@ -116,3 +117,20 @@ router.get('/logout',function(req,res){
   res.redirect('/users/login')
 })
 module.exports = router;
+
+
+router.get('/p/:user',function(req,res){
+  User
+  .findOne({username:req.params.user})
+  .exec((err,user)=>{
+      if(!err){
+          PUB
+          .find({username:req.params.user}) 
+          .exec((err,pubs)=>{
+            res.render('user',{user:user, pubs:pubs})
+          })       
+      }  
+      else
+      console.log('Erro: ' + err)          
+  })
+})

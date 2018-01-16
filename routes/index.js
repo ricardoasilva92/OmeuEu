@@ -78,6 +78,7 @@ router.get('/',(req,res,next)=>{
     }   
 });
 
+//nova publicação
 router.get('/newpub/:tipo', ensureAuthenticated, (req,res)=>{    
     var xtipo
     if(req.params.tipo==='evento')
@@ -99,38 +100,6 @@ router.get('/newpub/:tipo', ensureAuthenticated, (req,res)=>{
 
     res.render('newpub.ejs',{tipo:xtipo})
 })
-/*
-router.get('/receita', ensureAuthenticated, (req,res)=>{
-    res.render('receita.ejs')
-})
-
-router.get('/reg_desp', ensureAuthenticated, (req,res)=>{
-    res.render('reg_desp.ejs')
-})
-
-router.get('/evento', ensureAuthenticated,(req,res)=>{
-    res.render('evento.ejs')
-})
-
-router.get('/reg_form', ensureAuthenticated,(req,res)=>{
-    res.render('reg_form.ejs')
-})
-
-router.get('/ideia', ensureAuthenticated,(req,res)=>{
-    res.render('ideia.ejs')
-})
-
-router.get('/album', ensureAuthenticated,(req,res)=>{
-    res.render('album.ejs')
-})
-
-router.get('/ev_cient', ensureAuthenticated,(req,res)=>{
-    res.render('ev_cient.ejs')
-})
-
-router.get('/outro', ensureAuthenticated,(req,res)=>{
-    res.render('outro.ejs')
-})*/
 
 //editar publicacao
 router.get('/pub/edit/:id',function(req,res){
@@ -146,6 +115,7 @@ router.get('/pub/edit/:id',function(req,res){
     })
     })
 
+//mostrar publicação de um tipo
 router.get('/pub/t/:tipo',function(req,res){
     var noMatch
     var xtipo
@@ -189,6 +159,9 @@ router.get('/pub/t/:tipo',function(req,res){
     })
 })
 
+    
+
+//mostrar uma publicação
 router.get('/pub/show/:id',function(req,res){
 var noMatch
     PUB

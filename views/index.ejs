@@ -1,36 +1,40 @@
 <%- include('header') -%>
 		
+		<table width="100%">
 		<% if(user) {%>
-			
-			<div class="dropdown">
-				<button class="w3-button w3-green"> Nova Publicação
-				</button>
-				<div class="dropdown-content">
-						<a href="/newpub/evento">Evento</a>
-						<a href="/newpub/ideia">Ideia</a>
-						<a href="/newpub/reg_desp">Registo Desportivo</a>
-						<a href="/newpub/reg_form">Registo de formação</a>
-						<a href="/newpub/album">Álbum fotográfico</a>
-						<a href="/newpub/receita">Receita culinária</a>
-						<a href="/newpub/ev_cient">Evento Cientéfico</a>
-						<a href="/newpub/outro">Outro</a>
+				<td width="25%">
+					<div class="dropdown">
+						<button class="w3-button w3-blue"> Nova Publicação
+						</button>
+						<div class="dropdown-content">
+							<a href="/newpub/evento">Evento</a>
+							<a href="/newpub/ideia">Ideia</a>
+							<a href="/newpub/reg_desp">Registo Desportivo</a>
+							<a href="/newpub/reg_form">Registo de formação</a>
+							<a href="/newpub/album">Album fotográfico</a>
+							<a href="/newpub/receita">Receita culinária</a>
+							<a href="/newpub/ev_cient">Evento Cientéfico</a>
+							<a href="/newpub/outro">Outro</a>
+						</div>
 					</div>
-			</div>
-				
-			<a href='/users/logout'><input type='button' value='Logout' class='w3-button w3-green' /></a>
+					<a href='/users/logout'><input type='button' value='Logout' class='w3-button w3-blue' /></a>
+				</td>
 		<%} else {%>
-			<a href='/users/register'><input type='button' value='Registar' class='w3-button w3-green' /></a> 
-			<a href='/users/login'><input type='button' value='Login' class='w3-button w3-green' /></a>
+			<td width="25%">
+				<a href='/users/register'><input type='button' value='Registar' class='w3-button w3-blue' /></a> 
+				<a href='/users/login'><input type='button' value='Login' class='w3-button w3-blue' /></a>
+			</td>
 			<%}%>
-			
-		<form  align='right' action="/" method="GET" class="form-inline">
+			<td width="75%">
+				<form  align='right' action="/" method="GET" class="form-inline">
 					<div class="form-group">
-						<input type="text" name="search" placeholder="procura publicações..." class="form-control">
+						<input style="width:90%" type="text" name="search" placeholder="procura publicações..." class="form-control">
 						<input type="submit" value="Search" class="w3-button w3-blue">
 					</div>
-				</form>	
+				</form>
+			</td>	
 		</div>
-		
+		</table>
 		</header>
 		
 
@@ -203,7 +207,7 @@
 						<% } %>					
 						<tr>
 							<th>Autor </th>
-							<td><%= pubs[i].autor %></td> 
+							<td><a href="users/p/<%= pubs[i].username%>"><%= pubs[i].autor %></a></td> 
 						</tr>
 						<% if(pubs[i].pic){
 						for(j = 0; j < pubs[i].pic.length; j++){ 
