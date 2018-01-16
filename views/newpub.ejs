@@ -30,7 +30,7 @@
 </header>
 <% 
 		var d = new Date
-		var hora = d.toUTCString() %>
+		var hora = d.toISOString() %>
 <% if(tipo==='Álbum Fotográfico'){ %>
 	<form action='/pub' method='POST' enctype='multipart/form-data' >
 <% } %>

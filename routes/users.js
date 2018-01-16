@@ -21,7 +21,7 @@ router.post('/register', function(req,res){
   /*var flag1 = false;
   var flag2 = false;
 
-  User.find({"username":username}).exec((err,doc)=>{
+  User.find({username:username}).exec((err,doc)=>{
     if(!err){
       if(doc.length!=0){
         flag1 = true;
@@ -33,7 +33,7 @@ router.post('/register', function(req,res){
     }
   })
 
-  User.find({"email":email}).exec((err,doc)=>{
+  User.find({email:email}).exec((err,doc)=>{
     if(!err){
       if(doc.length!=0){
         var flag2 = true;

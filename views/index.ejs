@@ -80,7 +80,6 @@
 								}
 							}
 						}	%>
-
 							<% if(eventos.length!=0){ %>
 							<li><a href="/pub/t/eventos">Eventos</a></li>
 								<ul>
@@ -155,8 +154,6 @@
 					<% } %> 
 				</div>
 					<% 
-					var d = new Date
-					var hora = d.toISOString()
 					var p = 0;
 					for(var i=0; i<pubs.length; i++){%>
 					<% if(pubs[i].priv == 'public' || (user && pubs[i].username == user.username)){ %>
@@ -166,7 +163,14 @@
 						<% if(pubs[i].hora != "" && pubs[i].hora != null){ p++%>
 						<tr>
 							<th>Publicação de </th>
-							<td><%= pubs[i].hora %></td> 
+							<td>
+								<% var data = new Date(Date.parse(pubs[i].hora)) %>
+								<%=data.getDate()%>/<%=data.getMonth()+1%>/<%=data.getFullYear()%>
+								às <%=data.getHours()%>:<%if(data.getMinutes() < 10){%>0<%= data.getMinutes() %>
+								<% } else { %>
+								<%= data.getMinutes() %>
+								<% } %>
+							</td> 
 						</tr>
 						<% } %>       
 						<% if(pubs[i].titulo != "" && pubs[i].titulo != null){%>						
