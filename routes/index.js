@@ -229,7 +229,34 @@ router.delete('/pub/:id', function(req,res){
     })
 })
 
+router.post('/comment/:id',(req,res,next)=>{
+    let query = {_id:req.params.id}
+    PUB.findOne(query,function(err,pub){
+        if(err){
+            console.log(err,pub)
+        }
+        else {
+            var d = new Date()
+            var hora = d.toISOString()
+            var comment = {
+                autor: req.user.name,
+                comentario: req.body.comment,
+                hora: hora
+            }
+            pub.comentarios[pub.comentarios.length] = comment
 
+            PUB.update(query,pub,function(err){
+                if(err){
+                    console.log(err)
+                    return
+                }
+                else {
+                    res.redirect('/')
+                }
+            })
+        }
+    })
+})
 
 router.post('/pub',upload.any(),(req,res,next)=>{
    // console.log(req.body)
@@ -248,17 +275,19 @@ router.post('/pub',upload.any(),(req,res,next)=>{
         creditacao: req.body.creditacao,
         actividade: req.body.actividade,
         pic: [],
-        priv: req.body.priv
+        priv: req.body.priv,
+        comentarios: []
     })
     if(req.files){
-    for(var i=0;i<req.files.length;i++){
-        var novo = {
-            id_img: req.files[i].filename,
-            nome_img: req.files[i].originalname,
-            img_path: req.files[i].path
-        }   
-        nova.pic[i] = novo 
-    }}
+        for(var i=0;i<req.files.length;i++){
+            var novo = {
+                id_img: req.files[i].filename,
+                nome_img: req.files[i].originalname,
+                img_path: req.files[i].path
+            }   
+            nova.pic[i] = novo 
+        }
+    }
     console.log(nova)
         
     

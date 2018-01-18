@@ -9,6 +9,12 @@ var PicSchema = new Schema(
     }
 )
 
+var PubCommentsSchema = new Schema({
+    autor:{type:String,required:false},
+    comentario:{type:String,required:false},   
+    hora: {type:String,required:true}    
+})
+
 
 var PubSchema = new Schema(
     {
@@ -23,9 +29,9 @@ var PubSchema = new Schema(
         creditacao:{type:String,required:false},
         actividade:{type:String,required:false},
         pic: [PicSchema],
-        priv:{type:String,required:true}
+        priv:{type:String,required:true},
+        comentarios:[PubCommentsSchema]
         
     }
 )
-
 module.exports=mongoose.model('PUB',PubSchema,'pubs')

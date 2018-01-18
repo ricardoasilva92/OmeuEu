@@ -1,6 +1,7 @@
 <%- include('header') -%>
 		
 		<table width="100%">
+		<!-- Se user está autenticado (Nova Publicação/Logout) -->
 		<% if(user) {%>
 				<td width="25%">
 					<div class="dropdown">
@@ -19,12 +20,14 @@
 					</div>
 					<a href='/users/logout'><input type='button' value='Logout' class='w3-button w3-blue' /></a>
 				</td>
+		<!-- Se user não está autenticado (Registo/Login) -->
 		<%} else {%>
 			<td width="25%">
 				<a href='/users/register'><input type='button' value='Registar' class='w3-button w3-blue' /></a> 
 				<a href='/users/login'><input type='button' value='Login' class='w3-button w3-blue' /></a>
 			</td>
 			<%}%>
+		<!-- Se user está autenticado -->
 			<td width="75%">
 				<form  align='right' action="/" method="GET" class="form-inline">
 					<div class="form-group">
@@ -39,6 +42,7 @@
 		
 
 		<table width="100%" class="w3-table">
+			<!-- ÍNDICE -->
 			<td width="20%" valign="top">
 				<h3>Índice por Tipo</h3>
 				<ul>
@@ -146,6 +150,7 @@
 							<% } %>
 						</ul>
 			</td>
+			<!-- RESULTADOS -->
 			<td width="80%" valign="top">
 			<div class='w3-container'>	
 				<div class="col-md-6">
@@ -166,9 +171,7 @@
 							<td>
 								<% var data = new Date(Date.parse(pubs[i].hora)) %>
 								<%=data.getDate()%>/<%=data.getMonth()+1%>/<%=data.getFullYear()%>
-								às <%=data.getHours()%>:<%if(data.getMinutes() < 10){%>0<%= data.getMinutes() %>
-								<% } else { %>
-								<%= data.getMinutes() %>
+								às <%=data.getHours()%>:<%if(data.getMinutes() < 10){%>0<%= data.getMinutes() %><% } else { %><%= data.getMinutes() %>
 								<% } %>
 							</td> 
 						</tr>
@@ -241,7 +244,6 @@
 							<a class="next" onclick="plusSlides<%=i%>(1)">&#10095;</a>
 							</div>
 						</div>
-						
 					</table>
 					<script>
 							function openModal<%=i%>() {
@@ -285,7 +287,30 @@
 					<a href="/pub/edit/<%=pubs[i]._id%>" class="btn btn-default">Editar</a>
 					<a href="#" class="btn btn-danger delete-pub" data-id='<%=pubs[i]._id%>' >Remover</a>
 					<%} %> 
-					
+					<table class="w3-table w3-border">
+							<% for (var j; j < pubs[i].comentarios.length; j++){ %>
+								<tr>
+									<div class="w3-border">
+										<div class="w3-container w3-blue">
+											<b>Comentário de: </b><%= pubs[i].comentarios[j].autor %><br>
+											<% data = new Date(Date.parse(pubs[i].comentarios[j].hora)) %>
+											<%=data.getDate()%>/<%=data.getMonth()+1%>/<%=data.getFullYear()%>
+											às <%=data.getHours()%>:<%if(data.getMinutes() < 10){%>0<%= data.getMinutes() %><% } else { %><%= data.getMinutes() %>
+											<% } %>
+										</div>
+										<div class="w3-container">												
+											<%= pubs[i].comentarios[j].comentario %>
+										</div>
+									</div>
+								</tr>									
+							<% } %>
+						</table>
+						<form action='/comment/<%= pubs[i]._id %>' method='POST'>							
+							<div>
+								<input type='text' placeholder='Comentário' name='comment'/><br>
+								<input type='submit' value='Comentar' class='w3-button w3-blue' />								
+							</div>
+						</form>
 				</fieldset>
 					<% }} %> 
 					      	 
