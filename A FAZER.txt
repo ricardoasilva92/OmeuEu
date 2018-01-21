@@ -1,0 +1,20 @@
+Funcionalidade a adicionar:
+	1-Tornar público/privado ao editar
+	2-Partilha nas redes sociais
+	3-Login fb/Google
+	4-Nomes/emails duplicados
+	5-Indice por data
+	6-Colocar miniaturas nas imagens
+	7-Importação e exportação de dados (DSL) (dentro da interface) pode ser mantido em json{
+		botao exportar dados para utilizador (exporta só os dados do utilizador logado)
+		administrador (exportar todos os dados)
+	}	
+	8-adicionar likes (novo campo no schema, simples count)
+
+
+ARRANJAR:
+	-indice depois de search
+	-tirar o espaço de comentar senao estiver logado
+	-
+
+
