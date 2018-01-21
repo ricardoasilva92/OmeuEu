@@ -1,4 +1,4 @@
-Funcionalidade a adicionar:
+Funcionalidade a adicionar :
 	1-Tornar público/privado ao editar
 	2-Partilha nas redes sociais
 	3-Login fb/Google
@@ -15,6 +15,6 @@ Funcionalidade a adicionar:
 ARRANJAR:
 	-indice depois de search
 	-tirar o espaço de comentar senao estiver logado
-	-
+	-estrutura das publicações (ontologia)
 
 
