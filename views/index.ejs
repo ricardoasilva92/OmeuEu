@@ -1,12 +1,14 @@
 <%- include('header') -%>
 		
-		<table width="100%">
+		
 		<!-- Se user está autenticado (Nova Publicação/Logout) -->
+		<div class="topnav">
 		<% if(user) {%>
-				<td width="25%">
+				
 					<div class="dropdown">
-						<button class="w3-button w3-blue"> Nova Publicação
-						</button>
+							<button class="dropbtn">Nova Publicação 
+									<i class="fa fa-caret-down"></i>
+								  </button>
 						<div class="dropdown-content">
 							<a href="/newpub/evento">Evento</a>
 							<a href="/newpub/ideia">Ideia</a>
@@ -18,27 +20,29 @@
 							<a href="/newpub/outro">Outro</a>
 						</div>
 					</div>
-					<a href='/users/logout'><input type='button' value='Logout' class='w3-button w3-blue' /></a>
-				</td>
+					<a href='/users/logout'>LogOut</a>
+				
+				
 		<!-- Se user não está autenticado (Registo/Login) -->
 		<%} else {%>
-			<td width="25%">
-				<a href='/users/register'><input type='button' value='Registar' class='w3-button w3-blue' /></a> 
-				<a href='/users/login'><input type='button' value='Login' class='w3-button w3-blue' /></a>
-			</td>
+			
+				<a href='/users/register'>Registar</a> 
+				<a href='/users/login'>Login</a>
+			
 			<%}%>
 		<!-- Se user está autenticado -->
-			<td width="75%">
-				<form  align='right' action="/" method="GET" class="form-inline">
-					<div class="form-group">
-						<input style="width:90%" type="text" name="search" placeholder="procura publicações..." class="form-control">
-						<input type="submit" value="Search" class="w3-button w3-blue">
+			<div class="search-container">
+				<form   action="/" method="GET" class="form-inline">
+					<div class="form-group"></div>
+						<input style="width:80%" type="text" name="search" placeholder="procura publicações..." class="form-control">
+						<button type="submit"><i class="fa fa-search"></i></button>
 					</div>
 				</form>
-			</td>	
+			</div>
 		</div>
-		</table>
-		</header>
+		
+		
+		
 		
 
 		<table width="100%" class="w3-table">
