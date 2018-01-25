@@ -26,7 +26,23 @@
     <% if(pub.creditacao != "" && pub.creditacao != null){%>
         <input type='text' placeholder='Creditacao' name='creditacao' value='<%=pub.creditacao%>' /><br>
     <% } %>  
+    
+    <% if(pub.priv != "" && pub.priv != null && pub.priv=="private"){%>
+        <fieldset>
+                <legend>Privacidade</legend>
+                <input type="radio" name="priv" value="private" checked> Privado<br>
+                <input type="radio" name="priv" value="public"> Público<br>
+        </fieldset>
+        <% } %> 
 
+        <% if(pub.priv != "" && pub.priv != null && pub.priv=="public"){%>
+            <fieldset>
+                    <legend>Privacidade</legend>
+                    <input type="radio" name="priv" value="private" > Privado<br>
+                    <input type="radio" name="priv" value="public"checked> Público<br>
+            </fieldset>
+            <% } %> 
+    
 
     <input type='hidden' name='hora' value='<%= hora %>'/>
     

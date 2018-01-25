@@ -45,9 +45,7 @@
 		
 		
 
-		<table width="100%" class="w3-table">
-			<!-- ÍNDICE -->
-			<td width="20%" valign="top">
+		<div class="leftcolumn"> 
 				<h3>Índice por Tipo</h3>
 				<ul>
 						<% 
@@ -154,9 +152,11 @@
 							<% } %>
 						</ul>
 			</td>
+		</div>
+
 			<!-- RESULTADOS -->
-			<td width="80%" valign="top">
-			<div class='w3-container'>	
+			
+			<div class="rightcolumn">
 				<div class="col-md-6">
 					<% if(noMatch !== undefined) { %>
 						<h3><%=noMatch %></h3>
@@ -166,8 +166,12 @@
 					var p = 0;
 					for(var i=0; i<pubs.length; i++){%>
 					<% if(pubs[i].priv == 'public' || (user && pubs[i].username == user.username)){ %>
-					<fieldset>
-					<legend><b><%= pubs[i].tipo %></b></legend>
+					<div class="w3-card-4 w3-margin w3-white">
+							<header class="w3-container">
+									<h3><b><%= pubs[i].tipo %></b></h3>
+									
+								  </header>
+					
 					<table class='w3-table'>
 						<% if(pubs[i].hora != "" && pubs[i].hora != null){ p++%>
 						<tr>
@@ -249,6 +253,7 @@
 							</div>
 						</div>
 					</table>
+
 					<script>
 							function openModal<%=i%>() {
 							  document.getElementById('myModal<%=i%>').style.display = "block";
@@ -287,10 +292,14 @@
 							captionText.innerHTML = dots[slideIndex-1].alt;
 							}
 					</script>
+
+
 					<% if(user && pubs[i].username == user.username) {%>
 					<a href="/pub/edit/<%=pubs[i]._id%>" class="btn btn-default">Editar</a>
 					<a href="#" class="btn btn-danger delete-pub" data-id='<%=pubs[i]._id%>' >Remover</a>
 					<%} %> 
+
+
 					<table class="w3-table w3-border">
 							<% for (var j; j < pubs[i].comentarios.length; j++){ %>
 								<tr>
@@ -315,15 +324,15 @@
 								<input type='submit' value='Comentar' class='w3-button w3-blue' />								
 							</div>
 						</form>
-				</fieldset>
+					</div>
 					<% }} %> 
 					      	 
-			</div>
+			
 			<% if(p==0 &&  noMatch==undefined) {%>
 			&nbsp;
 			<b> Sem publicações :( <br> &nbsp; Crie uma! </b><br>
 			<% } %>
-			</td>
-		</table>		
+		</div>
+				
     </body>
 </html>

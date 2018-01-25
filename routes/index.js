@@ -202,6 +202,8 @@ router.post('/pub/edit/:id', function(req,res){
         pub.actividade=req.body.actividade
     if(req.body.creditacao)
         pub.creditacao=req.body.creditacao
+    if(req.body.priv)
+        pub.priv=req.body.priv
 
     let query = {_id:req.params.id}
 
