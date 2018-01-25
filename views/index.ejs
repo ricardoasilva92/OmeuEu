@@ -169,7 +169,7 @@
 					<div class="w3-card-4 w3-margin w3-white">
 							<header class="w3-container">
 									<h3><b><%= pubs[i].tipo %></b></h3>
-									
+
 								  </header>
 					
 					<table class='w3-table'>
@@ -298,10 +298,13 @@
 					<a href="/pub/edit/<%=pubs[i]._id%>" class="btn btn-default">Editar</a>
 					<a href="#" class="btn btn-danger delete-pub" data-id='<%=pubs[i]._id%>' >Remover</a>
 					<%} %> 
+					<button  class="w3-button w3-btn w3-indigo w3-border w3-border-blue w3-round-xlarge w3-right" onclick="myFunction('demo<%=i%>')"><b>Mostrar Comentários &nbsp;</b> <span class="w3-tag w3-white"><%=pubs[i].comentarios.length%></span></button>
 
 
+					<div id="demo<%=i%>" style="display:none">
+							<hr>
 					<table class="w3-table w3-border">
-							<% for (var j; j < pubs[i].comentarios.length; j++){ %>
+							<% for (j=0; j < pubs[i].comentarios.length; j++){ %>
 								<tr>
 									<div class="w3-border">
 										<div class="w3-container w3-blue">
@@ -318,6 +321,8 @@
 								</tr>									
 							<% } %>
 						</table>
+
+						</div>
 						<form action='/comment/<%= pubs[i]._id %>' method='POST'>							
 							<div>
 								<input type='text' placeholder='Comentário' name='comment'/><br>
@@ -327,7 +332,25 @@
 					</div>
 					<% }} %> 
 					      	 
-			
+				<script>
+					// Toggle between hiding and showing blog replies/comments
+					document.getElementById("myBtn").click();
+					function myFunction(id) {
+						var x = document.getElementById(id);
+						if (x.className.indexOf("w3-show") == -1) {
+							x.className += " w3-show";
+						} else { 
+							x.className = x.className.replace(" w3-show", "");
+						}
+					}
+					
+					function likeFunction(x) {
+						x.style.fontWeight = "bold";
+						x.innerHTML = "&#10003; Liked";
+					}
+				</script>
+
+
 			<% if(p==0 &&  noMatch==undefined) {%>
 			&nbsp;
 			<b> Sem publicações :( <br> &nbsp; Crie uma! </b><br>
