@@ -2,24 +2,33 @@
 <h3>Perfil: <%= user.name %></h3>
 </header>
 
-<body>
-    <div class='w3-container w3-teal'>
-    <table class='w3-table'>
-        <tr>
-            <th>Username:</th>
-            <td><%= user.username %></td>
-        </tr>
-        <tr>
-            <th>Nome:</th>
-            <td><%= user.name %></td>
-        </tr>
-        <tr>
-            <th>Email:</th>
-            <td><%= user.email %></td>
-        </tr>
-    </table>
+    <div class="leftcolumn">    
+        <div class='w3-container w3-gray'>
+            <table class='w3-table'>
+                <tr>
+                    <th>Username:</th>
+                    <td><%= user.username %></td>
+                </tr>
+                <tr>
+                    <th>Nome:</th>
+                    <td><%= user.name %></td>
+                </tr>
+                <tr>
+                    <th>Email:</th>
+                    <td><%= user.email %></td>
+                </tr>
+            </table>
+        </div>
+        <h3>Opções:</h3>
+        <ul>    
+            <li><a href="/download" class="btn btn-default">Apagar todas as minhas publicações</a></li>
+            <li><a href="/download" class="btn btn-default">Download de todas as minhas publicações</a></li>
+        </ul>
     </div>
 
+    
+
+    <div class="rightcolumn">
     <div class='w3-container'>	
         
     <% for(var i=0; i<pubs.length; i++){%>
@@ -72,7 +81,7 @@
             <% } %>					
             <tr>
                 <th>Autor </th>
-                <td><a href="users/p/<%= pubs[i].username%>"><%= pubs[i].autor %></a></td> 
+                <td><a href="/users/p/<%= pubs[i].username%>"><%= pubs[i].autor %></a></td> 
             </tr>
             <% if(pubs[i].pic){
             for(j = 0; j < pubs[i].pic.length; j++){ 
@@ -150,5 +159,5 @@
     </fieldset>
         <% }} %> 
     </div>
-    
+</div>
 </body>

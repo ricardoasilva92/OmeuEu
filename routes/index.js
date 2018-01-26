@@ -32,7 +32,11 @@ const storage = multer.diskStorage({
  
   var upload = multer({ dest: './public/images' ,fileFilter: imageFilter, storage: storage})
 
-/* GET home page. */
+  
+ 
+
+
+  /* GET home page. */
 
 router.get('/',(req,res,next)=>{
     var noMatch
@@ -58,7 +62,7 @@ router.get('/',(req,res,next)=>{
                 if(doc.length==0){ // nao encontrou resultados
                     noMatch = "Não foram encontrados resultados. Por favor tente outra vez."
                 }
-            res.render('index.ejs',{pubs: doc,noMatch : noMatch, ind: doc}) //noMatch como flag
+            //res.render('index.ejs',{pubs: doc,noMatch : noMatch, ind: doc}) //noMatch como flag
         }
         else
         console.log('Erro: ' + err)
@@ -77,6 +81,62 @@ router.get('/',(req,res,next)=>{
         })
     }   
 });
+
+
+router.get('/download',(req,res,next)=>{
+    PUB
+    .find()
+    .sort({hora:-1})
+    .exec((err,doc)=>{
+    if(!err){
+        var JSONResult = JSON.stringify(doc)
+        fs.writeFile("./public/downloads/pubs.json", JSONResult, function(err) {
+            if(err) {
+                console.log(err);
+            } else {
+                console.log("The file was saved!");
+                var file = './public/downloads/pubs.json';
+                res.download(file);
+            }
+        });
+    }
+    else
+    console.log('Erro: ' + err)
+    })
+
+   
+})
+
+
+/*
+router.get('/download', function(req, res){
+    var file = './public/images/1516921532417.jpg';
+    res.download(file); // Set disposition and send it.
+  });
+*/
+/*
+router.get('/download', function(req, res){
+    PUB
+    .find()
+    .sort({hora:-1})
+    .exec((err,doc)=>{
+    if(!err){
+        var JSONResult = JSON.stringify(doc)
+        fs.writeFile("pubs.json", JSONResult, function(err) {
+            if(err) {
+                console.log(err);
+            } else {
+                console.log("The file was saved!");
+            }
+        });
+    }
+    else
+    console.log('Erro: ' + err)
+    })
+    res.download(file); // Set disposition and send it.
+    });*/
+
+
 
 //nova publicação
 router.get('/newpub/:tipo', ensureAuthenticated, (req,res)=>{    
