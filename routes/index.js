@@ -84,7 +84,8 @@ router.get('/',(req,res,next)=>{
 
 
 
-//download de publicações
+//download de todas as publicações
+//[LUIS] -> só o admin é que pode fazer isto
 router.get('/download/pubs',(req,res,next)=>{
     PUB
     .find()
@@ -108,7 +109,7 @@ router.get('/download/pubs',(req,res,next)=>{
 })
 
 //download de todas as publicações de um utilizador em especifico
-//[LUIS] -> só o user em questão é que pode ver isto
+//[LUIS] -> só o user em questão é que pode fazer isto
 router.get('/download/pubs/:user',(req,res,next)=>{
     PUB
     .find({username:req.params.user})
@@ -131,6 +132,9 @@ router.get('/download/pubs/:user',(req,res,next)=>{
     })
 })
 
+
+
+  
 
 /*
 router.get('/download', function(req, res){

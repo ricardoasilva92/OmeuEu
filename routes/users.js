@@ -6,6 +6,8 @@ var passport = require('passport');
 var PUB = require('../models/pubs')
 let User = require('../models/users');
 
+var fs = require('fs')
+
 //register form
 router.get('/register', function(req,res){
   res.render('register.ejs');
@@ -132,5 +134,27 @@ router.get('/p/:user',function(req,res){
       }  
       else
       console.log('Erro: ' + err)          
+  })
+})
+
+//[LUIS] -> poe só o admin a poder fazer isto fazer isto
+router.get('/download',(req,res,next)=>{
+  User
+  .find()
+  .exec((err,doc)=>{
+  if(!err){
+      var JSONResult = JSON.stringify(doc)
+      fs.writeFile("./public/downloads/users.json", JSONResult, function(err) {
+          if(err) {
+              console.log(err);
+          } else {
+              console.log("The file was saved!");
+              var file = './public/downloads/users.json';
+              res.download(file);
+          }
+      });
+  }
+  else
+  console.log('Erro: ' + err)
   })
 })
