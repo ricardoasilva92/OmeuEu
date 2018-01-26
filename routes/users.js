@@ -127,7 +127,7 @@ router.get('/p/:user',function(req,res){
           PUB
           .find({username:req.params.user}) 
           .exec((err,pubs)=>{
-            res.render('user',{user:user, pubs:pubs})
+            res.render('user',{userAux:user, pubs:pubs}) //userAux para distinguir do user logado e do user do perfil
           })       
       }  
       else

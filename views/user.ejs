@@ -1,5 +1,5 @@
 <%- include('header') -%>
-<h3>Perfil: <%= user.name %></h3>
+<h3>Perfil: <%= userAux.name %></h3>
 </header>
 
     <div class="leftcolumn">    
@@ -7,33 +7,37 @@
             <table class='w3-table'>
                 <tr>
                     <th>Username:</th>
-                    <td><%= user.username %></td>
+                    <td><%= userAux.username %></td>
                 </tr>
                 <tr>
                     <th>Nome:</th>
-                    <td><%= user.name %></td>
+                    <td><%= userAux.name %></td>
                 </tr>
                 <tr>
                     <th>Email:</th>
-                    <td><%= user.email %></td>
+                    <td><%= userAux.email %></td>
                 </tr>
             </table>
         </div>
+        
+        <% if(user && user.username == userAux.username){ %>
         <h3>Opções:</h3>
         <ul>    
             <li><a href="/download" class="btn btn-default">Apagar todas as minhas publicações</a></li>
-            <li><a href="/download" class="btn btn-default">Download de todas as minhas publicações</a></li>
+            <li><a href="/download/pubs/<%= user.username %>" class="btn btn-default">Download de todas as minhas publicações</a></li>
+            <li><a href="/download/pubs" class="btn btn-default">Download de todas as publicações</a></li>
+            <li><a href="/download/users" class="btn btn-default">Download de todos users</a></li>
         </ul>
-    </div>
-
     
+    <%}%>
+</div>
 
     <div class="rightcolumn">
     <div class='w3-container'>	
         
     <% for(var i=0; i<pubs.length; i++){%>
         
-    <% if(pubs[i].priv == 'public' || (user && pubs[i].username == user.username)){ %>
+    <% if(pubs[i].priv == 'public' || (user && pubs[i].username == userAux.username)){ %>
         <fieldset>
         <legend><b><%= pubs[i].tipo %></b></legend>
         <table class='w3-table'>

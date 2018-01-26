@@ -83,7 +83,9 @@ router.get('/',(req,res,next)=>{
 });
 
 
-router.get('/download',(req,res,next)=>{
+
+//download de publicações
+router.get('/download/pubs',(req,res,next)=>{
     PUB
     .find()
     .sort({hora:-1})
@@ -103,8 +105,30 @@ router.get('/download',(req,res,next)=>{
     else
     console.log('Erro: ' + err)
     })
+})
 
-   
+//download de todas as publicações de um utilizador em especifico
+//[LUIS] -> só o user em questão é que pode ver isto
+router.get('/download/pubs/:user',(req,res,next)=>{
+    PUB
+    .find({username:req.params.user})
+    .sort({hora:-1})
+    .exec((err,doc)=>{
+    if(!err){
+        var JSONResult = JSON.stringify(doc)
+        fs.writeFile("./public/downloads/pubs_" + req.params.user + ".json", JSONResult, function(err) {
+            if(err) {
+                console.log(err);
+            } else {
+                console.log("The file was saved!");
+                var file = './public/downloads/pubs_' + req.params.user +'.json';
+                res.download(file);
+            }
+        });
+    }
+    else
+    console.log('Erro: ' + err)
+    })
 })
 
 
