@@ -34,15 +34,21 @@
 
 
         <% if(user.username == 'admin'){ %>
-        <h3>Opções administrador:</h3>
-        <ul>
-            <li><a href="/download/pubs" class="btn btn-default">Download de todas as publicações</a></li>
-            <li><a href="/users/download" class="btn btn-default">Download de todos users</a></li>
-            <li><a href="#" class=" delete-pub" data-id='' >Apagar todas as publicações</a></li>
-            <%}%>
-        </ul>
-    
-    <%}%>
+            <h3>Opções administrador:</h3>
+            <ul>
+                <li><a href="/download/pubs" class="btn btn-default">Download de todas as publicações</a></li>
+                <li><a href="/users/download" class="btn btn-default">Download de todos users</a></li>
+                <li><a href="#" class=" delete-pub" data-id='' >Apagar todas as publicações</a></li>
+                <li>
+                        <form action='/insdb' method='POST' enctype='multipart/form-data' >
+                            <label>Inserir dados a partir de JSON </label></b>
+                            <input type="file" name="fichdados" class="w3-input w3-border"/>
+                            <input type="submit" value="Enviar" class="w3-btn w3-red"/>
+                        </li>
+                <%}%>
+            </ul>
+        
+        <%}%>
 </div>
 
     <div class="rightcolumn">

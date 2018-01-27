@@ -326,7 +326,10 @@ var noMatch
             var noMatch
             var year = parseInt(req.params.year)
             var month = parseInt(req.params.month)
-            var low = year+"-"+month+"-01T00:00:00.000Z"
+            if(month<10)
+                var low = year+"-0"+month+"-01T00:00:00.000Z"
+            else
+                var low = year+"-"+month+"-01T00:00:00.000Z"        
             var high = year+"-"+(month+1)+"-01T00:00:00.000Z"
             
             PUB
@@ -415,10 +418,66 @@ router.delete('/pub/', function(req,res){
     }
 })
 
+//insercao de dados a partir de ficheiro
+router.post('/insdb',(req,res,next)=>{
+    var form = new formidable.IncomingForm()
+    form.parse(req, function(err, fields, files){
+        if(!err) {
+            var oldpath = files.fichdados.path;
+            var newpath = './public/downloads/' + files.fichdados.name;
+            
+            fs.rename(oldpath, newpath, function (err) {
+                if(!err) {
+                    fields.status = "Ficheiro recebido e guardado com sucesso."
+                }
+                else {
+                    fields.status = "Ocorreram erros na gravação do ficheiro enviado"
+                }
+            })
 
+                console.log("ANTES DE LER")
+            //var obj = JSON.parse(fs.readFileSync(newpath, 'utf8'));
+            fs.readFile(newpath, 'utf8', function (err,data) {
+                if(err) throw err
+                var obj = JSON.parse(data); 
+                for(var i = 0; i < obj.length; i++) {
+                    var nova = new PUB()
+                        nova.titulo= obj[i].titulo
+                        nova.local= obj[i].local
+                        nova.desc= obj[i].desc
+                        nova.hora= obj[i].hora
+                        nova.tipo= obj[i].tipo
+                        nova.username= obj[i].username
+                        nova.autor= obj[i].autor
+                        nova.duracao= obj[i].duracao
+                        nova.creditacao= obj[i].creditacao
+                        nova.actividade= obj[i].actividade
+                        
+                        nova.pic=[]
+                        for(var j = 0; j<obj[i].pic.length; j++)
+                            nova.pic[j]= obj[i].pic[j]
+                        
+                        nova.priv= obj[i].priv
 
+                        nova.comentarios = []
+                        for(var j = 0; j<obj[i].comentarios.length; j++)
+                            nova.comentarios[j]= obj[i].comentarios[j]
+                        
+                    
+                    nova.save((err,resultado)=>{
+                        if(!err){
+                            console.log("Publicacao adicionada:")
+                          }
+                          else{console.log("erro" + err)}
+                    }) 
+                }
+            })
+        }    
+    res.redirect('/')
+    })
+})
 
-
+//post de comentarios
 router.post('/comment/:id',(req,res,next)=>{
     let query = {_id:req.params.id}
     PUB.findOne(query,function(err,pub){
