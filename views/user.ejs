@@ -25,10 +25,11 @@
         <ul>    
             <li><a href="/download" class="btn btn-default">Apagar todas as minhas publicações</a></li>
             <li><a href="/download/pubs/<%= user.username %>" class="btn btn-default">Download de todas as minhas publicações</a></li>
-
-            <!--[LUIS] -> se conseguires só o admin a conseguir tambem só ver estes butoes] -->
+           
+            <% if(user.username == 'admin'){ %>
             <li><a href="/download/pubs" class="btn btn-default">Download de todas as publicações</a></li>
             <li><a href="/users/download" class="btn btn-default">Download de todos users</a></li>
+            <%}%>
         </ul>
     
     <%}%>
