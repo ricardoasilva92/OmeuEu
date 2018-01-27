@@ -288,6 +288,72 @@ var noMatch
     })
     })
 
+    router.get('/pub/showChrono/:year',(req,res,next)=>{
+        var noMatch
+        var year = parseInt(req.params.year)
+        var low = year+"-01-01T00:00:00.000Z"
+        var high = (year+1)+"-01-01T00:00:00.000Z"
+        
+        PUB
+        .find({
+            hora: {
+                "$gte": low,
+                "$lt": high
+            }
+            })
+        .exec((err,pub)=>{
+            
+            if(!err){
+                PUB
+                .find()
+                .sort({hora:-1})
+                .exec((err,tdoc)=>{
+                if(!err){
+                    res.render('index.ejs',{pubs: pub,noMatch : noMatch, ind:tdoc})
+                }
+                else
+                console.log('Erro: ' + err)
+                })
+            }
+            else{
+            res.render('error',{error:err})
+            }
+        })
+        })
+
+        router.get('/pub/showChrono/:year/:month',(req,res,next)=>{
+            var noMatch
+            var year = parseInt(req.params.year)
+            var month = parseInt(req.params.month)
+            var low = year+"-"+month+"-01T00:00:00.000Z"
+            var high = year+"-"+(month+1)+"-01T00:00:00.000Z"
+            
+            PUB
+            .find({
+                hora: {
+                    "$gte": low,
+                    "$lt": high
+                }
+                })
+            .exec((err,pub)=>{
+                
+                if(!err){
+                    PUB
+                    .find()
+                    .sort({hora:-1})
+                    .exec((err,tdoc)=>{
+                    if(!err){
+                        res.render('index.ejs',{pubs: pub,noMatch : noMatch, ind:tdoc})
+                    }
+                    else
+                    console.log('Erro: ' + err)
+                    })
+                }
+                else{
+                res.render('error',{error:err})
+                }
+            })
+            })
 
 //fazer UPDATE de publicacao
 router.post('/pub/edit/:id', function(req,res){

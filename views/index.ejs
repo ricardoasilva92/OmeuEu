@@ -47,8 +47,6 @@
 		
 
 		<div class="leftcolumn"> 
-				<h3>Índice por Tipo</h3>
-				<ul>
 						<% 
 						var eventos = []
 						var ideias = []
@@ -59,8 +57,10 @@
 						var evts_cient = []
 						var outros = []
 						
-						for(var i=0; i<ind.length; i++){%>
-							<% if(ind[i].priv === 'public' || (user && ind[i].username == user.username)){ 
+						var anos = []
+						
+						for(var i=0; i<ind.length; i++){
+							if(ind[i].priv === 'public' || (user && ind[i].username == user.username)){ 
 								if(ind[i].tipo === 'Evento'){
 									eventos[eventos.length] = { id:ind[i]._id, titulo:ind[i].titulo }
 								}
@@ -85,8 +85,47 @@
 								if(ind[i].tipo === 'Outro'){
 									outros[outros.length] = { id:ind[i]._id, titulo:ind[i].titulo }
 								}
+
+								var data = new Date(Date.parse(ind[i].hora))
+								var xmes = data.getMonth()
+								var xano = data.getFullYear()
+								var flag = false
+
+								for(var j=0; j<anos.length; j++){
+									if(anos[j].ano===xano)
+									{
+										anos[j].mes[xmes].pubs[anos[j].mes[xmes].pubs.length] = { id:ind[i]._id, titulo:ind[i].titulo }
+										flag = true
+									}
+								}
+								
+								if(!flag){
+									var l = anos.length
+									anos[l] = { ano: xano,
+												mes: [
+													{pubs: []},
+													{pubs: []},
+													{pubs: []},
+													{pubs: []},
+													{pubs: []},
+													{pubs: []},
+													{pubs: []},
+													{pubs: []},
+													{pubs: []},
+													{pubs: []},
+													{pubs: []},
+													{pubs: []}
+												]
+									}
+									anos[l].mes[xmes].pubs[0] = { id:ind[i]._id, titulo:ind[i].titulo }
+								}
 							}
-						}	%>
+						}	
+						
+						
+						%>
+						<h3>Índice por Tipo</h3>
+						<ul>
 							<% if(eventos.length!=0){ %>
 							<li><a href="/pub/t/eventos">Eventos</a></li>
 								<ul>
@@ -151,6 +190,50 @@
 									<% } %>
 								</ul>
 							<% } %>
+						</ul>
+
+						<h3>Índice por Data</h3>
+						<ul>
+							<% 
+							for(var i = 0; i < anos.length; i++){
+								%>
+								<li><a href="/pub/showChrono/<%=anos[i].ano%>"><%=anos[i].ano%></a></li>
+								<ul>
+									<% 
+									for(var j = 11; j >= 0; j--){
+										if(anos[i].mes[j].pubs.length !== 0){
+											var mesText
+											switch(j){
+												case 0: mesText = 'Janeiro'; break;
+												case 1: mesText = 'Fevereiro'; break;
+												case 2: mesText = 'Março'; break;
+												case 3: mesText = 'Abril'; break;
+												case 4: mesText = 'Maio'; break;
+												case 5: mesText = 'Junho'; break;
+												case 6: mesText = 'Julho'; break;
+												case 7: mesText = 'Agosto'; break;
+												case 8: mesText = 'Setembro'; break;
+												case 9: mesText = 'Outubro'; break;
+												case 10: mesText = 'Novembro'; break;
+												case 11: mesText = 'Dezembro'; break;
+											}
+										%>
+										<li><a href="/pub/showChrono/<%=anos[i].ano%>/<%=(j+1)%>"><%=mesText%></a></li>
+										<ul>
+										<% 
+											for(var k = 0; k < anos[i].mes[j].pubs.length; k++){
+												%>
+												<li><a href="/pub/show/<%=anos[i].mes[j].pubs[k].id%>"><%=anos[i].mes[j].pubs[k].titulo%></a></li>
+										<% } %>
+										</ul>	
+									<%		
+										}
+									}
+									%>	
+								</ul>
+							<%
+							}
+							%>
 						</ul>
 			</td>
 		</div>
@@ -231,7 +314,6 @@
 							<tr>
 								<th>Foto <%= j+1%>: </th>
 								<td>
-									
 									<element onclick='openModal<%=i%>();currentSlide(<%=j+1%>)'  class="hover-shadow cursor"><%= pubs[i].pic[j].nome_img %></element>
 								</td> 
 							</tr>
