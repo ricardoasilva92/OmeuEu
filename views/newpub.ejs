@@ -1,6 +1,6 @@
 <%- include('header') -%>
 <h4>Nova Publicação: <%= tipo%></h4>
-	<% if(tipo==='Álbum Fotográfico'){ %>
+	<% if(tipo==='Álbum Fotográfico' || tipo==='Viagem'){ %>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 			<script>
 				$(document).ready(function(){
@@ -31,10 +31,10 @@
 <% 
 		var d = new Date
 		var hora = d.toISOString() %>
-<% if(tipo==='Álbum Fotográfico'){ %>
+<% if(tipo==='Álbum Fotográfico' || tipo==='Viagem'){ %>
 	<form action='/pub' method='POST' enctype='multipart/form-data' >
 <% } %>
-<% if(tipo!=='Álbum Fotográfico'){ %>
+<% if(tipo!=='Álbum Fotográfico' && tipo!=='Viagem'){ %>
 	<form action='/pub' method='POST'>
 <% } %>
 <fieldset>
@@ -56,7 +56,7 @@
 	<input type='hidden' name='hora' value='<%= hora %>'/>
 	<input type='hidden' name='tipo' value='<%= tipo %>'/>
 </fieldset>
-<% if(tipo==='Álbum Fotográfico'){ %>
+<% if(tipo==='Álbum Fotográfico' || tipo==='Viagem'){ %>
 	<fieldset id="fotos">
 		<legend>Fotografias</legend>
 		<input id="adicionar" type="button" value="+1"/>

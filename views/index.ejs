@@ -13,10 +13,11 @@
 							<a href="/newpub/evento">Evento</a>
 							<a href="/newpub/ideia">Ideia</a>
 							<a href="/newpub/reg_desp">Registo Desportivo</a>
-							<a href="/newpub/reg_form">Registo de formação</a>
+							<a href="/newpub/reg_form">Registo Académico</a>
 							<a href="/newpub/album">Album fotográfico</a>
 							<a href="/newpub/receita">Receita culinária</a>
-							<a href="/newpub/ev_cient">Evento Cientéfico</a>
+							<a href="/newpub/ev_cient">Festividade</a>
+							<a href="/newpub/viagem">Viagem</a>
 							<a href="/newpub/outro">Outro</a>
 						</div>
 					</div>
@@ -56,7 +57,8 @@
 						var receitas = []
 						var evts_cient = []
 						var outros = []
-						
+						var viagens = []
+
 						var anos = []
 						var inds = 0
 						
@@ -83,6 +85,9 @@
 								}
 								if(ind[i].tipo === 'Participação em Evento Científico'){
 									evts_cient[evts_cient.length] = { id:ind[i]._id, titulo:ind[i].titulo }
+								}
+								if(ind[i].tipo === 'Viagem'){
+									viagens[viagens.length] = { id:ind[i]._id, titulo:ind[i].titulo }
 								}
 								if(ind[i].tipo === 'Outro'){
 									outros[outros.length] = { id:ind[i]._id, titulo:ind[i].titulo }
@@ -185,6 +190,14 @@
 									<% } %>
 								</ul>
 							<% } %>
+							<% if(viagens.length!=0){ %>
+								<li><a href="/pub/t/viagens">Viagens</a></li>
+									<ul>
+										<% for(var i=0; i<viagens.length; i++){ %>
+											<li><a href="/pub/show/<%=viagens[i].id%>"><%= viagens[i].titulo %></a></li>
+										<% } %>
+									</ul>
+								<% } %>
 							<% if(outros.length!=0){ %>
 							<li><a href="/pub/t/outros">Outros</a></li>
 								<ul>

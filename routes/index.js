@@ -188,6 +188,8 @@ router.get('/newpub/:tipo', ensureAuthenticated, (req,res)=>{
         xtipo = 'Evento'
     if(req.params.tipo==='ideia')
         xtipo = 'Ideia'
+    if(req.params.tipo==='viagem')
+        xtipo = 'Viagem'
     if(req.params.tipo==='reg_desp')
         xtipo = 'Registo Desportivo'
     if(req.params.tipo==='reg_form')
@@ -235,6 +237,8 @@ router.get('/pub/t/:tipo',function(req,res){
         xtipo = 'Álbum Fotográfico'
     if(req.params.tipo==='receitas')
         xtipo = 'Receita Culinária'
+    if(req.params.tipo==='viagens')
+        xtipo = 'Viagem'
     if(req.params.tipo==='evts_cient')
         xtipo = 'Participação em Evento Científico'
     if(req.params.tipo==='outro')
