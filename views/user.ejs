@@ -21,14 +21,24 @@
         </div>
         
         <% if(user && user.username == userAux.username){ %>
-        <h3>Opções:</h3>
+        <h3>Opções conta:</h3>
         <ul>    
+
             <li><a href="/download" class="btn btn-default">Apagar todas as minhas publicações</a></li>
+            
+
             <li><a href="/download/pubs/<%= user.username %>" class="btn btn-default">Download de todas as minhas publicações</a></li>
-           
-            <% if(user.username == 'admin'){ %>
+        
+            
+        </ul>
+
+
+        <% if(user.username == 'admin'){ %>
+        <h3>Opções administrador:</h3>
+        <ul>
             <li><a href="/download/pubs" class="btn btn-default">Download de todas as publicações</a></li>
             <li><a href="/users/download" class="btn btn-default">Download de todos users</a></li>
+            <li><a href="#" class=" delete-pub" data-id='' >Apagar todas as publicações</a></li>
             <%}%>
         </ul>
     

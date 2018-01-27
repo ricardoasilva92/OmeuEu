@@ -105,7 +105,7 @@ router.get('/p/:user',function(req,res){
   })
 })
 
-//[LUIS] -> poe só o admin a poder fazer isto fazer isto
+
 router.get('/download',(req,res,next)=>{
   User
   .find()

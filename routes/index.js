@@ -148,6 +148,7 @@ router.get('/download/pubs/:user',(req,res,next)=>{
 
 
 
+
   
 
 /*
@@ -389,7 +390,7 @@ router.post('/pub/edit/:id', function(req,res){
 //apagar publicacoes
 router.delete('/pub/:id', function(req,res){
     let query = {_id:req.params.id}
-
+    
     PUB.remove(query,function(err){
         if(err){
             console.log(err)
@@ -398,6 +399,25 @@ router.delete('/pub/:id', function(req,res){
         res.send('Success')
     })
 })
+
+
+//apagar todas as publicações
+router.delete('/pub/', function(req,res){
+    let query = {}
+    if(req.user.name === 'admin'){
+        PUB.remove(query,function(err){
+            if(err){
+                console.log(err)
+            }
+            //responder ao request feito no main.js
+            res.send('Success')
+        })
+    }
+})
+
+
+
+
 
 router.post('/comment/:id',(req,res,next)=>{
     let query = {_id:req.params.id}
