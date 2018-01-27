@@ -25,8 +25,6 @@
         <ul>    
 
             <li><a href="/download" class="btn btn-default">Apagar todas as minhas publicações</a></li>
-            
-
             <li><a href="/download/pubs/<%= user.username %>" class="btn btn-default">Download de todas as minhas publicações</a></li>
         
             
@@ -57,8 +55,11 @@
     <% for(var i=0; i<pubs.length; i++){%>
         
     <% if(pubs[i].priv == 'public' || (user && pubs[i].username == userAux.username)){ %>
-        <fieldset>
-        <legend><b><%= pubs[i].tipo %></b></legend>
+        <div class="w3-card-4 w3-margin w3-white">                
+        <header class="w3-container">
+            <h3><b><%= pubs[i].tipo %></b></h3>
+        </header>
+
         <table class='w3-table'>
             <% if(pubs[i].hora != "" && pubs[i].hora != null){ %>
             <tr>
@@ -175,11 +176,13 @@
                 }
         </script>
         <% if(user && pubs[i].username == user.username) {%>
-        <a href="/pub/edit/<%=pubs[i]._id%>" class="btn btn-default">Editar</a>
-        <a href="#" class="btn btn-danger delete-pub" data-id='<%=pubs[i]._id%>' >Remover</a>
+            <a href="/pub/edit/<%=pubs[i]._id%>" class="w3-button w3-btn w3-indigo w3-border w3-border-blue w3-round-xlarge">Editar</a>
+            <a href="#" class="w3-button w3-btn w3-indigo w3-border w3-border-blue w3-round-xlarge delete-pub" data-id='<%=pubs[i]._id%>' >Remover</a>
         <%} %> 
         
     </fieldset>
+    </div>
+
         <% }} %> 
     </div>
 </div>

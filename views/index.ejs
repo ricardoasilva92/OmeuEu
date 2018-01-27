@@ -58,9 +58,11 @@
 						var outros = []
 						
 						var anos = []
+						var inds = 0
 						
 						for(var i=0; i<ind.length; i++){
 							if(ind[i].priv === 'public' || (user && ind[i].username == user.username)){ 
+								inds++;
 								if(ind[i].tipo === 'Evento'){
 									eventos[eventos.length] = { id:ind[i]._id, titulo:ind[i].titulo }
 								}
@@ -122,7 +124,8 @@
 							}
 						}	
 						
-						
+						if(inds!=0)
+						{
 						%>
 						<h3>Índice por Tipo</h3>
 						<ul>
@@ -233,6 +236,7 @@
 								</ul>
 							<%
 							}
+						}
 							%>
 						</ul>
 			</td>
