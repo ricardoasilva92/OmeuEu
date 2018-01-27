@@ -148,39 +148,6 @@ router.get('/download/pubs/:user',(req,res,next)=>{
 
 
 
-
-  
-
-/*
-router.get('/download', function(req, res){
-    var file = './public/images/1516921532417.jpg';
-    res.download(file); // Set disposition and send it.
-  });
-*/
-/*
-router.get('/download', function(req, res){
-    PUB
-    .find()
-    .sort({hora:-1})
-    .exec((err,doc)=>{
-    if(!err){
-        var JSONResult = JSON.stringify(doc)
-        fs.writeFile("pubs.json", JSONResult, function(err) {
-            if(err) {
-                console.log(err);
-            } else {
-                console.log("The file was saved!");
-            }
-        });
-    }
-    else
-    console.log('Erro: ' + err)
-    })
-    res.download(file); // Set disposition and send it.
-    });*/
-
-
-
 //nova publicação
 router.get('/newpub/:tipo', ensureAuthenticated, (req,res)=>{    
     var xtipo
@@ -198,8 +165,8 @@ router.get('/newpub/:tipo', ensureAuthenticated, (req,res)=>{
         xtipo = 'Álbum Fotográfico'
     if(req.params.tipo==='receita')
         xtipo = 'Receita Culinária'
-    if(req.params.tipo==='ev_cient')
-        xtipo = 'Participação em Evento Científico'
+    if(req.params.tipo==='festividade')
+        xtipo = 'Festividade'
     if(req.params.tipo==='outro')
         xtipo = 'Outro'
 
@@ -552,6 +519,7 @@ router.post('/pub',upload.any(),(req,res,next)=>{
         desc: req.body.desc,
         hora: req.body.hora,
         tipo: req.body.tipo,
+        subtipo: req.body.subtipo,
         username: req.user.username,
         autor: req.user.name,
         duracao: req.body.duracao,

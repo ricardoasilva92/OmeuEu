@@ -23,6 +23,7 @@ var PubSchema = new Schema(
         desc: {type:String,required:true},
         hora: {type:String,required:true},
         tipo: {type:String,required:false},
+        subtipo: {type:String,required:false},
         username:{type:String,required:false},
         autor:{type:String,required:false},
         duracao:{type:String,required:false},

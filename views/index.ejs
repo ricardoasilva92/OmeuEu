@@ -16,7 +16,7 @@
 							<a href="/newpub/reg_form">Registo Académico</a>
 							<a href="/newpub/album">Album fotográfico</a>
 							<a href="/newpub/receita">Receita culinária</a>
-							<a href="/newpub/ev_cient">Festividade</a>
+							<a href="/newpub/festividade">Festividade</a>
 							<a href="/newpub/viagem">Viagem</a>
 							<a href="/newpub/outro">Outro</a>
 						</div>
@@ -55,7 +55,7 @@
 						var regs_form = []
 						var albuns = []
 						var receitas = []
-						var evts_cient = []
+						var festividades = []
 						var outros = []
 						var viagens = []
 
@@ -83,8 +83,8 @@
 								if(ind[i].tipo === 'Receita Culinária'){
 									receitas[receitas.length] = { id:ind[i]._id, titulo:ind[i].titulo }
 								}
-								if(ind[i].tipo === 'Participação em Evento Científico'){
-									evts_cient[evts_cient.length] = { id:ind[i]._id, titulo:ind[i].titulo }
+								if(ind[i].tipo === 'Festividade'){
+									festividades[festividades.length] = { id:ind[i]._id, titulo:ind[i].titulo }
 								}
 								if(ind[i].tipo === 'Viagem'){
 									viagens[viagens.length] = { id:ind[i]._id, titulo:ind[i].titulo }
@@ -182,11 +182,11 @@
 									<% } %>
 								</ul>
 							<% } %>
-							<% if(evts_cient.length!=0){ %>
-							<li><a href="/pub/t/evts_cient">Eventos Científicos</a></li>
+							<% if(festividades.length!=0){ %>
+							<li><a href="/pub/t/festividades">Festividades</a></li>
 								<ul>
-									<% for(var i=0; i<evts_cient.length; i++){ %>
-										<li><a href="/pub/show/<%=evts_cient[i].id%>"><%= evts_cient[i].titulo %></a></li>
+									<% for(var i=0; i<festividades.length; i++){ %>
+										<li><a href="/pub/show/<%=festividades[i].id%>"><%= festividades[i].titulo %></a></li>
 									<% } %>
 								</ul>
 							<% } %>
@@ -284,7 +284,13 @@
 								<% } %>
 							</td> 
 						</tr>
-						<% } %>       
+						<% } %> 
+						<% if(pubs[i].subtipo != "" && pubs[i].subtipo != null){%>						
+							<tr>
+								<th>Sub-tipo </th>
+								<td><%= pubs[i].subtipo %></td>  
+							</tr>
+							<% } %>        
 						<% if(pubs[i].titulo != "" && pubs[i].titulo != null){%>						
 						<tr>
 							<th>Titulo </th>
