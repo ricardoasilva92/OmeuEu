@@ -2,11 +2,9 @@ var express = require('express');
 var router = express.Router();
 const bcrypt = require('bcryptjs')
 var passport = require('passport');  
-
+var fs = require('fs')
 var PUB = require('../models/pubs')
 let User = require('../models/users');
-
-var fs = require('fs')
 
 //register form
 router.get('/register', function(req,res){
@@ -20,32 +18,6 @@ router.post('/register', function(req,res){
   const username = req.body.username;
   const password = req.body.password;
   const password2 = req.body.password2;
-  /*var flag1 = false;
-  var flag2 = false;
-
-  User.find({username:username}).exec((err,doc)=>{
-    if(!err){
-      if(doc.length!=0){
-        flag1 = true;
-        console.log('usernameflag: '+flag1)
-      }
-    }
-    else {
-      console.log('erro ao checkar username')
-    }
-  })
-
-  User.find({email:email}).exec((err,doc)=>{
-    if(!err){
-      if(doc.length!=0){
-        var flag2 = true;
-        console.log('emailflag: '+flag2)
-      }
-    }
-    else {
-      console.log('erro ao checkar email')
-    }
-  })*/
 
   req.checkBody('name', 'Nome obrigatório').notEmpty();
   req.checkBody('email', 'Email obrigatório').notEmpty();
@@ -56,18 +28,11 @@ router.post('/register', function(req,res){
 
   let errors = req.validationErrors();
 
-  //if(errors || flag1 || flag2){
     if(errors){
     console.log('erro ao registar user')
     for (i = 0; i < errors.length; i++) {
       req.flash('error',errors[i].msg)
     } 
-    /*if(flag1){
-      req.flash('error','Username já existente')
-    }
-    if(flag2){
-      req.flash('error','Email já existente')
-    }*/
     res.render('register.ejs')
   } else {
     let newUser = new User({
@@ -85,10 +50,13 @@ router.post('/register', function(req,res){
       newUser.password = hash;
       newUser.save(function(err){
         if(err){
-          console.log(err);
-          return;
+          if(err.message=="User validation failed: username: username")
+              req.flash('danger','Username já registado')
+          if(err.message=="User validation failed: email: email")
+              req.flash('danger','E-mail já registado')
+
+          res.redirect('/users/register')
         } else {
-          //console.log('user registado, uflag: '+flag1+' eflag: '+flag2)
           req.flash('success_msg','Está agora registado!')
           res.redirect('/users/login')
         }

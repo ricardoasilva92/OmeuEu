@@ -87,49 +87,63 @@ router.get('/',(req,res,next)=>{
 //download de todas as publicações
 //[LUIS] -> só o admin é que pode fazer isto
 router.get('/download/pubs',(req,res,next)=>{
-    PUB
-    .find()
-    .sort({hora:-1})
-    .exec((err,doc)=>{
-    if(!err){
-        var JSONResult = JSON.stringify(doc)
-        fs.writeFile("./public/downloads/pubs.json", JSONResult, function(err) {
-            if(err) {
-                console.log(err);
-            } else {
-                console.log("The file was saved!");
-                var file = './public/downloads/pubs.json';
-                res.download(file);
-            }
-        });
+        if(req.user.name === 'admin'){        
+        PUB
+        .find()
+        .sort({hora:-1})
+        .exec((err,doc)=>{
+        if(!err){
+            var JSONResult = JSON.stringify(doc)
+            fs.writeFile("./public/downloads/pubs.json", JSONResult, function(err) {
+                if(err) {
+                    console.log(err);
+                } else {
+                    console.log("The file was saved!");
+                    var file = './public/downloads/pubs.json';
+                    res.download(file);
+                }
+            });
     }
     else
     console.log('Erro: ' + err)
     })
+    }
+    else{
+        console.log('ERRO: download não permitido')
+        req.flash('danger','Não tem permissão')
+        res.redirect('/')
+    }
 })
 
 //download de todas as publicações de um utilizador em especifico
 //[LUIS] -> só o user em questão é que pode fazer isto
 router.get('/download/pubs/:user',(req,res,next)=>{
-    PUB
-    .find({username:req.params.user})
-    .sort({hora:-1})
-    .exec((err,doc)=>{
-    if(!err){
-        var JSONResult = JSON.stringify(doc)
-        fs.writeFile("./public/downloads/pubs_" + req.params.user + ".json", JSONResult, function(err) {
-            if(err) {
-                console.log(err);
-            } else {
-                console.log("The file was saved!");
-                var file = './public/downloads/pubs_' + req.params.user +'.json';
-                res.download(file);
-            }
-        });
+    if(req.user.username === req.params.user){
+        PUB
+        .find({username:req.params.user})
+        .sort({hora:-1})
+        .exec((err,doc)=>{
+        if(!err){
+            var JSONResult = JSON.stringify(doc)
+            fs.writeFile("./public/downloads/pubs_" + req.params.user + ".json", JSONResult, function(err) {
+                if(err) {
+                    console.log(err);
+                } else {
+                    console.log("The file was saved!");
+                    var file = './public/downloads/pubs_' + req.params.user +'.json';
+                    res.download(file);
+                }
+            });
+        }
+        else
+        console.log('Erro: ' + err)
+        })
     }
-    else
-    console.log('Erro: ' + err)
-    })
+    else{
+    console.log('ERRO: download não permitido')
+    req.flash('danger','Não tem permissão')
+    res.redirect('/')
+    }
 })
 
 
