@@ -386,7 +386,9 @@
 					<a href="#" class="w3-button w3-btn w3-indigo w3-border w3-border-blue w3-round-xlarge delete-pub" data-id='<%=pubs[i]._id%>' >Remover</a>
 					<%} %> 
 					<button  class="w3-button w3-btn w3-indigo w3-border w3-border-blue w3-round-xlarge w3-right" onclick="myFunction('demo<%=i%>')"><b>Mostrar Comentários &nbsp;</b> <span class="w3-tag w3-white"><%=pubs[i].comentarios.length%></span></button>
-
+					<form action='/like/<%=pubs[i]._id%>' method='POST'>
+						<button  class="w3-button w3-btn w3-indigo w3-border w3-border-blue w3-round-xlarge w3-right"><b>LIKE &nbsp;</b> <span class="w3-tag w3-white"><%=pubs[i].likes.length%></span></button>
+					</form>
 
 					<div id="demo<%=i%>" style="display:none">
 							<hr>

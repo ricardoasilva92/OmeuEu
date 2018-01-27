@@ -30,8 +30,8 @@ var PubSchema = new Schema(
         actividade:{type:String,required:false},
         pic: [PicSchema],
         priv:{type:String,required:true},
-        comentarios:[PubCommentsSchema]
-        
+        comentarios:[PubCommentsSchema],
+        likes:[{type:String,required:true}]
     }
 )
 module.exports=mongoose.model('PUB',PubSchema,'pubs')

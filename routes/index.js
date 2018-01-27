@@ -390,6 +390,35 @@ router.post('/pub/edit/:id', function(req,res){
     })
 })
 
+router.post('/like/:id', function(req,res){  
+    let query = {_id:req.params.id}
+    let xpub = {}
+    var flag = false
+    PUB
+    .findOne(query)
+    .exec((err,pub)=>{
+        pub.likes
+        for(var i=0; i<pub.likes.length; i++){
+            if(pub.likes[i]===req.user.username){
+                flag = true
+            }
+        }
+        if(!flag){
+            pub.likes[pub.likes.length] = req.user.username
+            PUB.update(query,pub,function(err){
+                if(err){
+                    console.log(err)
+                    return
+                } else {
+                    res.redirect('/')
+                }
+            })
+        } else {
+            console.log('erro: like já registado')            
+        }     
+    })
+})
+
 //apagar publicacoes
 router.delete('/pub/:id', function(req,res){
     let query = {_id:req.params.id}
@@ -452,6 +481,7 @@ router.post('/insdb',(req,res,next)=>{
                         nova.duracao= obj[i].duracao
                         nova.creditacao= obj[i].creditacao
                         nova.actividade= obj[i].actividade
+                        nova.likes = obj[i].likes
                         
                         nova.pic=[]
                         for(var j = 0; j<obj[i].pic.length; j++)
@@ -525,7 +555,8 @@ router.post('/pub',upload.any(),(req,res,next)=>{
         actividade: req.body.actividade,
         pic: [],
         priv: req.body.priv,
-        comentarios: []
+        comentarios: [],
+        likes: []
     })
     if(req.files){
         for(var i=0;i<req.files.length;i++){
