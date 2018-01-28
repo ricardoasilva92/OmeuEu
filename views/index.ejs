@@ -64,6 +64,18 @@
 						var inds = 0
 						
 						for(var i=0; i<ind.length; i++){
+
+							 
+							
+							
+							var topPubs = ind.slice()
+				
+							topPubs.sort(function(a, b) {
+								return b.likes.length - a.likes.length;
+							});
+							
+				
+
 							if(ind[i].priv === 'public' || (user && ind[i].username == user.username)){ 
 								inds++;
 								if(ind[i].tipo === 'Evento'){
@@ -546,20 +558,9 @@
 	<div class="column side">
 
 			<h3>Publicações mais Populares:</h3>
-			<% 
-			
-			
-			var topPubs = pubs.slice()
-
-			topPubs.sort(function(a, b) {
-				return b.likes.length - a.likes.length;
-			});
-			%>
-
-
 			<ol>
 					<% 
-			for(var i=0; i < pubs.length; i++){
+			for(var i=0; i < ind.length; i++){
 			if(topPubs[i].priv == 'public' || (user && topPubs[i].username == topPubs.username)){ 
 				%>
 				<li>
