@@ -2,7 +2,8 @@
 <h3>Perfil: <%= userAux.name %></h3>
 </header>
 
-    <div class="leftcolumn">    
+    <div class="row">
+        <div class="column side">   
         <div class='w3-container w3-gray'>
             <table class='w3-table'>
                 <tr>
@@ -47,9 +48,10 @@
             </ul>
         
         <%}%>
-</div>
+    </div>
 
-    <div class="rightcolumn">
+
+<div class="column middle">
     <div class='w3-container'>	
         
     <% for(var i=0; i<pubs.length; i++){%>
@@ -185,5 +187,6 @@
 
         <% }} %> 
     </div>
+
 </div>
 </body>
