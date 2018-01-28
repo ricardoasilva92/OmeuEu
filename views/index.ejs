@@ -461,7 +461,7 @@
 					<%} %> 
 					<button  class="w3-button w3-btn w3-indigo w3-border w3-border-blue w3-round-xlarge w3-right" onclick="myFunction('demo<%=i%>')"><b>Mostrar Comentários &nbsp;</b> <span class="w3-tag w3-white"><%=pubs[i].comentarios.length%></span></button>
 					
-					<% if(user && pubs[i].username == user.username) {%>
+					<% if(user ) {%>
 						<% 	var gostou = false;
 							for(var k=0;k < pubs[i].likes.length;k++)
 								if(pubs[i].likes[k] == user.username)
@@ -543,7 +543,29 @@
 	
 
 	<div class="column side">
+
 			<h3>Publicações mais Populares:</h3>
+			<% 
+			
+			
+			var topPubs = pubs.slice()
+
+			topPubs.sort(function(a, b) {
+				return b.likes.length - a.likes.length;
+			});
+			%>
+
+
+			<ul>
+					<% 
+			for(var i=0; i<2; i++){
+			if(topPubs[i].priv == 'public' || (user && topPubs[i].username == topPubs.username)){ 
+				%>
+				<li>
+				<a href="/pub/show/<%= topPubs[i].id%>"><%= topPubs[i].titulo %></a>				
+				</li>
+				<% }} %>
+			</ul>
 	</div>
 </div>
 	<script>
