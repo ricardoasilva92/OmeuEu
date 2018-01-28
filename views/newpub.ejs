@@ -1,6 +1,6 @@
 <%- include('header') -%>
 <h4>Nova Publicação: <%= tipo%></h4>
-	<% if(tipo==='Álbum Fotográfico' || tipo==='Viagem' || tipo==='Festividade'){ %>
+	<% if(tipo==='Álbum Fotográfico' || tipo==='Registo Desportivo' || tipo==='Viagem' || tipo==='Festividade'){ %>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 			<script>
 				$(document).ready(function(){
@@ -31,17 +31,23 @@
 <% 
 		var d = new Date
 		var hora = d.toISOString() %>
-<% if(tipo==='Álbum Fotográfico' || tipo==='Viagem' || tipo==='Festividade'){ %>
+<% if(tipo==='Álbum Fotográfico' || tipo==='Registo Desportivo' || tipo==='Viagem' || tipo==='Festividade'){ %>
 	<form action='/pub' method='POST' enctype='multipart/form-data' >
 <% } %>
-<% if(tipo!=='Álbum Fotográfico' && tipo!=='Viagem' && tipo!=='Festividade'){ %>
+<% if(tipo!=='Álbum Fotográfico' && tipo!=='Registo Desportivo' &&tipo!=='Viagem' && tipo!=='Festividade'){ %>
 	<form action='/pub' method='POST'>
 <% } %>
 <fieldset>
 	<legend>Info da publicação (preencha os campos que pretender):</legend>
+
 	<% if(tipo==='Registo Desportivo' ) { %>
 		<input type='text' placeholder='Tipo de desporto' name='subtipo'/><br>
 	<% } %>
+
+	<% if(tipo==='Registo Académico' ) { %>
+		<input type='text' placeholder='Workshop, UC, etc...' name='subtipo'/><br>
+	<% } %>
+
 	<% if(tipo==='Festividade' ) { %>
 		<input type='text' placeholder='Tipo de Festividade' name='subtipo'/><br>
 	<% } %>
@@ -54,13 +60,13 @@
 	<input type='text' placeholder='Duração' name='duracao'/><br>
 	<% } %>
 	
-	<% if(tipo==='Registo de Formação' || tipo==='Outro' ) { %>
+	<% if(tipo==='Registo Académico' || tipo==='Outro' ) { %>
 	<input type='text' placeholder='Creditacao' name='creditacao'/><br>
 	<% } %>
 	<input type='hidden' name='hora' value='<%= hora %>'/>
 	<input type='hidden' name='tipo' value='<%= tipo %>'/>
 </fieldset>
-<% if(tipo==='Álbum Fotográfico' || tipo==='Viagem' || tipo==='Festividade'){ %>
+<% if(tipo==='Álbum Fotográfico' || tipo==='Registo Desportivo' || tipo==='Viagem' || tipo==='Festividade'){ %>
 	<fieldset id="fotos">
 		<legend>Fotografias</legend>
 		<input id="adicionar" type="button" value="+1"/>

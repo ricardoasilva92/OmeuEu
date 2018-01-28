@@ -158,7 +158,7 @@ router.get('/newpub/:tipo', ensureAuthenticated, (req,res)=>{
     if(req.params.tipo==='reg_desp')
         xtipo = 'Registo Desportivo'
     if(req.params.tipo==='reg_form')
-        xtipo = 'Registo de Formação'
+        xtipo = 'Registo Académico'
     if(req.params.tipo==='album')
         xtipo = 'Álbum Fotográfico'
     if(req.params.tipo==='receita')
@@ -197,7 +197,7 @@ router.get('/pub/t/:tipo',function(req,res){
     if(req.params.tipo==='regs_desp')
         xtipo = 'Registo Desportivo'
     if(req.params.tipo==='regs_form')
-        xtipo = 'Registo de Formação'
+        xtipo = 'Registo Académico'
     if(req.params.tipo==='albuns')
         xtipo = 'Álbum Fotográfico'
     if(req.params.tipo==='receitas')
