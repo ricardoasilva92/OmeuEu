@@ -3,19 +3,21 @@
     <head>
         <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link href="http://fonts.googleapis.com/css?family=Lobster&subset=latin" rel="stylesheet" type="text/css">
+        
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<title>O meu eu digital...</title>	
 		<style>
                 .header {
-                    padding: 20px;
+                    padding: 1px;
                     font-size: 20px;
                     text-align: left;
-                    background: rgb(32, 126, 235);
+                    background: rgb(77, 143, 218);
                 }
                 .topnav {
                     overflow: hidden;
-                    background-color: rgb(18, 72, 134);
+                    background-color: rgb(63, 109, 161);
                 }
                 
                 .topnav a {
@@ -278,12 +280,43 @@
                 .hover-shadow:hover {
                     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
                 }
+
+                h1 {
+    font-family: "Lobster", sans-serif;
+    font-size: 96px;
+    font-weight: bold;
+    text-align: center;
+}
+
+        .mask-galaxy {
+            background: url(http://www.jpl.nasa.gov/spaceimages/v2/getMediumImage.php?id=PIA03519) center center;
+            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+            -webkit-animation: travelGalaxy 10s linear infinite;
+            -moz-animation: travelGalaxy 10s linear infinite;
+            -moz-text-fill-color: transparent;
+            -moz-background-clip: text;
+            -moz-animation: travelGalaxy 10s linear infinite;
+            -o-text-fill-color: transparent;
+            -o-background-clip: text;
+            -o-animation: travelGalaxy 10s linear infinite;
+        }
+
+        @-webkit-keyframes travelGalaxy {
+            0% {background-position: right bottom;}
+            100% {background-position: left top;}
+        }
+        @-moz-keyframes travelGalaxy {
+            0% {background-position: right bottom;}
+            100% {background-position: left top;}
+        }
+
 				</style>
     </head>
     <body>
         <script src="/js/main.js"> </script>
 		
 		<div class="header">
-            <h1><a href="/"><b>omeueu</b></a></h1>
+            <h1 class="mask-galaxy"><a href="/"><b>omeueu</b></a></h1>
         </div>
    
