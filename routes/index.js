@@ -85,7 +85,6 @@ router.get('/',(req,res,next)=>{
 
 
 //download de todas as publicações
-//[LUIS] -> só o admin é que pode fazer isto
 router.get('/download/pubs',(req,res,next)=>{
         if(req.user.name === 'admin'){        
         PUB
@@ -116,7 +115,6 @@ router.get('/download/pubs',(req,res,next)=>{
 })
 
 //download de todas as publicações de um utilizador em especifico
-//[LUIS] -> só o user em questão é que pode fazer isto
 router.get('/download/pubs/:user',(req,res,next)=>{
     if(req.user.username === req.params.user){
         PUB
@@ -404,6 +402,19 @@ router.delete('/pub/:id', function(req,res){
     })
 })
 
+
+//apagar publicações próprias
+router.delete('/pub/delete/:user', function(req,res){
+    let query = {username:req.params.user}
+    
+    PUB.remove(query,function(err){
+        if(err){
+            console.log(err)
+        }
+        //responder ao request feito no main.js
+        res.send('Success')
+    })
+})
 
 //apagar todas as publicações
 router.delete('/pub/', function(req,res){
