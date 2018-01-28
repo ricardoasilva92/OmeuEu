@@ -96,6 +96,7 @@ router.get('/p/:user',function(req,res){
       if(!err){
           PUB
           .find({username:req.params.user}) 
+          .sort({hora:-1})
           .exec((err,pubs)=>{
             res.render('user',{userAux:user, pubs:pubs}) //userAux para distinguir do user logado e do user do perfil
           })       

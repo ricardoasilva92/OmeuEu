@@ -55,20 +55,27 @@
 <div class="column middle">
     <div class='w3-container'>	
         
-    <% for(var i=0; i<pubs.length; i++){%>
+    <% 
+    var p = 0;
+    for(var i=0; i<pubs.length; i++){%>
         
-    <% if(pubs[i].priv == 'public' || (user && pubs[i].username == userAux.username)){ %>
+    <% if((pubs[i].priv == 'public' && pubs[i].username == userAux.username) || (user && userAux.username === user.username)){ %>
         <div class="w3-card-4 w3-margin w3-white">                
         <header class="w3-container">
             <h3><b><%= pubs[i].tipo %></b></h3>
         </header>
 
         <table class='w3-table'>
-            <% if(pubs[i].hora != "" && pubs[i].hora != null){ %>
-            <tr>
-                <th>Publicação de </th>
-                <td><%= pubs[i].hora %></td> 
-            </tr>
+            <% if(pubs[i].hora != "" && pubs[i].hora != null){ p++%>
+                <tr>
+                    <th>Publicação de </th>
+                    <td>
+                        <% var data = new Date(Date.parse(pubs[i].hora)) %>
+                        <%=data.getDate()%>/<%=data.getMonth()+1%>/<%=data.getFullYear()%>
+                        às <%=data.getHours()%>:<%if(data.getMinutes() < 10){%>0<%= data.getMinutes() %><% } else { %><%= data.getMinutes() %>
+                        <% } %>
+                    </td> 
+                </tr>
             <% } %>       
             <% if(pubs[i].titulo != "" && pubs[i].titulo != null){%>						
             <tr>
@@ -116,8 +123,7 @@
                 <tr>
                     <th>Foto <%= j+1%>: </th>
                     <td>
-                        
-                        <element onclick='openModal<%=i%>();currentSlide(<%=j+1%>)'  class="hover-shadow cursor"><%= pubs[i].pic[j].nome_img %></element>
+                        <element onclick='openModal<%=i%>();currentSlide(<%=j+1%>)'  class="hover-shadow cursor"><img src='http://localhost:3000/images/<%=pubs[i].pic[j].id_img%>' style="width:20%"></element>                        
                     </td> 
                 </tr>
             <% }}} %>
@@ -187,6 +193,10 @@
     </div>
 
         <% }} %> 
+    <% if(p==0) {%>
+	    &nbsp;
+		<b> Este utilizador ainda não fez publicações </b>
+	<% } %>
     </div>
 
 </div>
