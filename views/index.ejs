@@ -47,7 +47,8 @@
 		
 		
 
-		<div class="leftcolumn"> 
+		<div class="row">
+				<div class="column side">
 						<% 
 						var eventos = []
 						var ideias = []
@@ -132,88 +133,138 @@
 						if(inds!=0)
 						{
 						%>
+
+
 						<h3>Índice por Tipo</h3>
+						<div onclick="expandCollapse()" id="expand-collapse" align="left">&#8680</div>
 						<ul>
 							<% if(eventos.length!=0){ %>
+							<div id="eventos" class="mainmenu">
 							<li><a href="/pub/t/eventos">Eventos</a></li>
-								<ul>
+								<div class="submenu">
+							<ul>
 									<% for(var i=0; i<eventos.length; i++){ %>
 										<li><a href="/pub/show/<%=eventos[i].id%>"><%= eventos[i].titulo %></a></li>
 									<% } %>
 								</ul>
+							</div>
+						</div>
 							<% } %>
 							<% if(ideias.length!=0){ %>
+							<div id="ideias" class="mainmenu">
 							<li><a href="/pub/t/ideias">Ideias</a></li>
+								<div class="submenu">
 								<ul>
 									<% for(var i=0; i<ideias.length; i++){ %>
 										<li><a href="/pub/show/<%=ideias[i].id%>"><%= ideias[i].titulo %></a></li>
 									<% } %>
 								</ul>
+							</div>
+						</div>
 							<% } %>
 							<% if(regs_desp.length!=0){ %>
+								<div id="reg_desp" class="mainmenu">
+										
 							<li><a href="/pub/t/regs_desp">Registos Desportivos</a></li>
+							<div class="submenu">
 								<ul>
 									<% for(var i=0; i<regs_desp.length; i++){ %>
 										<li><a href="/pub/show/<%=regs_desp[i].id%>"><%= regs_desp[i].titulo %></a></li>
 									<% } %>
 								</ul>
+							</div>
+						</div>
 							<% } %>
+
+
 							<% if(regs_form.length!=0){ %>
+						<div id="reg_forma" class="mainmenu">
 							<li><a href="/pub/t/regs_form">Registos de Formação</a></li>
+							<div class="submenu">
 								<ul>
 									<% for(var i=0; i<regs_desp.length; i++){ %>
 										<li><a href="/pub/show/<%=regs_form[i].id%>"><%= regs_form[i].titulo %></a></li>
 									<% } %>
 								</ul>
+							</div>
+						</div>
 							<% } %>
 							<% if(albuns.length!=0){ %>
+						<div id="albuns" class="mainmenu">
 							<li><a href="/pub/t/albuns">Álbuns Fotográficos</a></li>
+							<div class="submenu">
 								<ul>
 									<% for(var i=0; i<albuns.length; i++){ %>
 										<li><a href="/pub/show/<%=albuns[i].id%>"><%= albuns[i].titulo %></a></li>
 									<% } %>
 								</ul>
+							</div>
+						</div>
 							<% } %>
+
 							<% if(receitas.length!=0){ %>
+						<div id="receitas" class="mainmenu">
 							<li><a href="/pub/t/receitas">Receitas Culinárias</a></li>
+							<div class="submenu">
 								<ul>
 									<% for(var i=0; i<receitas.length; i++){ %>
 										<li><a href="/pub/show/<%=receitas[i].id%>"><%= receitas[i].titulo %></a></li>
 									<% } %>
 								</ul>
+							</div>
+						</div>
 							<% } %>
+
+							
 							<% if(festividades.length!=0){ %>
+						<div id="festividades" class="mainmenu">
 							<li><a href="/pub/t/festividades">Festividades</a></li>
+							<div class="submenu">
 								<ul>
 									<% for(var i=0; i<festividades.length; i++){ %>
 										<li><a href="/pub/show/<%=festividades[i].id%>"><%= festividades[i].titulo %></a></li>
 									<% } %>
 								</ul>
+							</div>
+						</div>
 							<% } %>
+
 							<% if(viagens.length!=0){ %>
+								<div id="festividades" class="mainmenu">
 								<li><a href="/pub/t/viagens">Viagens</a></li>
+								<div class="submenu">
 									<ul>
 										<% for(var i=0; i<viagens.length; i++){ %>
 											<li><a href="/pub/show/<%=viagens[i].id%>"><%= viagens[i].titulo %></a></li>
 										<% } %>
 									</ul>
+								</div>
+							</div>
 								<% } %>
 							<% if(outros.length!=0){ %>
+						<div id="outros" class="mainmenu">
 							<li><a href="/pub/t/outros">Outros</a></li>
+							<div class="submenu">
 								<ul>
 									<% for(var i=0; i<outros.length; i++){ %>
 										<li><a href="/pub/show/<%=outros[i].id%>"><%= outros[i].titulo %></a></li>
 									<% } %>
 								</ul>
+							</div>
+						</div>
 							<% } %>
 						</ul>
 
+
+						<div onclick="expandCollapse2()" id="expand-collapse2" align="left">&#8680</div>
 						<h3>Índice por Data</h3>
 						<ul>
 							<% 
 							for(var i = 0; i < anos.length; i++){
 								%>
+								<div id="outros" class="mainmenu2">
 								<li><a href="/pub/showChrono/<%=anos[i].ano%>"><%=anos[i].ano%></a></li>
+								<div class="submenu2">
 								<ul>
 									<% 
 									for(var j = 11; j >= 0; j--){
@@ -247,6 +298,8 @@
 									}
 									%>	
 								</ul>
+							</div>
+						</div>
 							<%
 							}
 						}
@@ -254,10 +307,12 @@
 						</ul>
 			</td>
 		</div>
+		
+		
 
 			<!-- RESULTADOS -->
 			
-			<div class="rightcolumn">
+			<div class="column middle">
 				<div class="col-md-6">
 					<% if(noMatch !== undefined) { %>
 						<h3><%=noMatch %></h3>
@@ -449,12 +504,15 @@
 
 						</div>
 						<hr>	
+						<hr>
+						<% if(user) {%>
 						<form action='/comment/<%= pubs[i]._id %>' method='POST'>							
 							<div>
 								<input class="w3-input w3-border w3-animate-input" type='text' placeholder='Comentário' style="width:30%" name='comment'/><br>
 								<input type='submit' value='Comentar' class='w3-button w3-btn w3-indigo w3-border w3-border-blue w3-round-xlarge' />								
 							</div>
 						</form>
+						<% } %> 
 					</div>
 					<% }} %> 
 					      	 
@@ -482,6 +540,35 @@
 			<b> Sem publicações :( <br> &nbsp; Crie uma! </b><br>
 			<% } %>
 		</div>
-				
+	
+
+	<div class="column side">
+			<h3>Publicações mais Populares:</h3>
+	</div>
+</div>
+	<script>
+	function expandCollapse() {
+	if($(".submenu").css('display') == 'none') {
+		$("#expand-collapse").html("&#8680");
+		$(".submenu").show("slow");
+	} else {
+		$("#expand-collapse").html("&#8680");
+		$(".submenu").hide("slow");
+	}
+}
+	</script>
+
+	<script>
+		function expandCollapse2() {
+		if($(".submenu2").css('display') == 'none') {
+			$("#expand-collapse2").html("&#8680");
+			$(".submenu2").show("slow");
+		} else {
+			$("#expand-collapse2").html("&#8680");
+			$(".submenu2").hide("slow");
+		}
+	}
+		</script>
+
     </body>
 </html>
