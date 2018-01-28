@@ -333,6 +333,8 @@ router.post('/pub/edit/:id', function(req,res){
     let pub={}
     if(req.body.titulo)
         pub.titulo=req.body.titulo
+    if(req.body.subtipo)
+        pub.subtipo=req.body.subtipo
     if(req.body.local)
         pub.local=req.body.local
     if(req.body.desc)

@@ -9,6 +9,10 @@
     <legend>Info da publicação:</legend>
     <input type='text' placeholder='Titulo' name='titulo' value='<%=pub.titulo %>' /><br>
     
+    <% if(pub.subtipo != "" && pub.subtipo != null){%>
+        <input type='text' placeholder='Subtipo' name='subtipo' value='<%=pub.subtipo %>' /><br>
+        <% } %>
+
     <% if(pub.local != "" && pub.local != null){%>
         <input type='text' placeholder='Local' name='local' value='<%=pub.local %>' /><br>
         <% } %>
