@@ -385,6 +385,7 @@ router.post('/like/:id', function(req,res){
                 }
             })
         } else {
+            
             console.log('erro: like já registado')            
         }     
     })
