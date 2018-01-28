@@ -136,6 +136,7 @@
 
 
 						<h3>Índice por Tipo</h3>
+						<script>expandCollapse()</script>
 						<div onclick="expandCollapse()" id="expand-collapse" align="left">&#8680</div>
 						<ul>
 							<% if(eventos.length!=0){ %>
@@ -179,10 +180,10 @@
 
 							<% if(regs_form.length!=0){ %>
 						<div id="reg_forma" class="mainmenu">
-							<li><a href="/pub/t/regs_form">Registos de Formação</a></li>
+							<li><a href="/pub/t/regs_form">Registos Académicos</a></li>
 							<div class="submenu">
 								<ul>
-									<% for(var i=0; i<regs_desp.length; i++){ %>
+									<% for(var i=0; i<regs_form.length; i++){ %>
 										<li><a href="/pub/show/<%=regs_form[i].id%>"><%= regs_form[i].titulo %></a></li>
 									<% } %>
 								</ul>
@@ -256,8 +257,8 @@
 						</ul>
 
 
-						<div onclick="expandCollapse2()" id="expand-collapse2" align="left">&#8680</div>
 						<h3>Índice por Data</h3>
+						<div onclick="expandCollapse2()" id="expand-collapse2" align="left">&#8680</div>
 						<ul>
 							<% 
 							for(var i = 0; i < anos.length; i++){
