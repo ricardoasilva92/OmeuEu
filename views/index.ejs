@@ -556,10 +556,10 @@
 	
 
 	<div class="column side">
-
+			<% if(ind.lenth>0){ %>
 			<h3>Publicações mais Populares:</h3>
 			<ol>
-					<% 
+					<% }
 			for(var i=0; i < ind.length; i++){
 			if(topPubs[i].priv == 'public' || (user && topPubs[i].username == topPubs.username)){ 
 				%>
